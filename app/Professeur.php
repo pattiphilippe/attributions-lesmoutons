@@ -8,6 +8,7 @@ class Professeur extends Model
 {
     protected $primaryKey = 'acronyme';
     protected $keyType = 'string';
-
+    
+    public  $timestamps = false;
     public $incrementing = false;
 }
