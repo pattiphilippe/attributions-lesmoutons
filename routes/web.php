@@ -16,3 +16,5 @@ Route::get('/', function () {
 })->name('accueil');
 
 Route::resource('professeurs', 'ProfesseurController');
+
+Route::resource('groups','GroupController');
