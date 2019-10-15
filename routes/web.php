@@ -12,7 +12,11 @@
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 })->name('accueil');
 
 Route::resource('professeurs', 'ProfesseurController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
