@@ -50,4 +50,17 @@ class ProfesseursTest extends TestCase
 
         $this->assertEquals($count, 105);
     }
+
+    public function testInsertProfessorWithSameId() 
+    {
+        $this->expectExceptionMessage("two acronyme same");
+
+        $professor1 = factory(App\Professeur::class)->make([
+            'acronyme' => 'ABS',
+            'nom' => 'Absil',
+            'prenom' => 'Romain'
+        ]);
+    }
+
+
 }
