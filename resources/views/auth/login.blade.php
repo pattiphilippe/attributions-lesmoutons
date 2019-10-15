@@ -8,7 +8,7 @@
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" autofocus>
         @error('email')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -16,7 +16,7 @@
         @enderror
 
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control last-input @error('password') is-invalid @enderror" placeholder="Password" required>
+        <input type="password" id="inputPassword" name="password" class="form-control last-input @error('password') is-invalid @enderror" placeholder="Password">
         @error('password')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -27,8 +27,8 @@
             <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div> --}}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a class="btn btn-lg btn-info btn-block" href="/register" role="button">Register</a>
+        <button id="login-button" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a id="register-button" class="btn btn-lg btn-info btn-block" href="/register" role="button">Register</a>
         <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
     </form>
 @endsection
