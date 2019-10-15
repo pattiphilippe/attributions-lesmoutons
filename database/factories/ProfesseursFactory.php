@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Professeur::class, function (Faker $faker) {
     return [
-        'acronyme' => $faker->unique()->lexify('***'),
+        'acronyme' => $faker->unique()->lexify('???'),
         'nom' =>  $faker->firstname,
         'prenom' => $faker->lastname
     ];
