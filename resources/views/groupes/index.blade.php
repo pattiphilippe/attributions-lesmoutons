@@ -19,3 +19,8 @@
         @endforeach
     </tbody>
 </table>
+<div class="buttonBloc">
+    <button type="button" onclick="window.location='{{ route('accueil') }}' "> > vers accueil </button>
+    {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
+</div>
+@endsection
