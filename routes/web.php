@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('auth.login');
-})->name('accueil');
+})->middleware('guest')->name('accueil');
 
 Route::resource('professeurs', 'ProfesseurController');
 
