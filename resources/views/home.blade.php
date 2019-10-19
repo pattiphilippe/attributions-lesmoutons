@@ -1,20 +1,46 @@
-@extends('layouts.app')
+@extends('layout')
+
+@section('title', 'Home')
 
 @section('content')
-<div class="container">
+<div id="dashboard-container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                <div id="actions-container">
+                    <a class="action border rounded" href="/professeurs">
+                        <div class="action-logo">
+                            <img src="{{ asset('images/professor.png') }}" alt="professor-logo" width="64" height="64">
                         </div>
-                    @endif
+                        <div class="action-body-container">
+                            <div class="action-title">
+                                Professeurs
+                            </div>
+                            <div class="action-description">
+                                Liste de professeurs
+                            </div>
+                        </div>
+                    </a>
 
-                    You are logged in!
+                    <a class="action border rounded" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <div class="action-logo">
+                            <img src="{{ asset('images/logout.png') }}" alt="professor-logo" width="64" height="64">
+                        </div>
+                        <div class="action-body-container">
+                            <div class="action-title">
+                                Se déconnecter
+                            </div>
+                            <div class="action-description">
+                                Se déconnecter de votre compte
+                            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

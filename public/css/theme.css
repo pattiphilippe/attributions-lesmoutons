@@ -130,3 +130,42 @@ form {
 #table-professeurs-list tr:hover {
     background-color: lightsteelblue;
 }
+
+#dashboard-container {
+    margin-top: 5rem;
+}
+
+#actions-container {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 10px 0 10px 0;
+}
+
+a.action {
+    text-decoration: none;
+    color: black;
+}
+
+.action:hover {
+    background-color: #f7f7f7;
+}
+
+.action-logo {
+    flex: 2;
+}
+
+.action-title {
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.action-body-container {
+    flex: 10;
+}
