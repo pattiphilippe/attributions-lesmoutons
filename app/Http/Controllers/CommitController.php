@@ -13,7 +13,7 @@ class CommitController extends Controller
 
     public static function getCommits($connection) {
         $statement = $connection->query(
-            'SELECT id, message, author, insertion FROM commits ORDER BY insertion ASC'
+            'SELECT id, message, author, insertion FROM commits ORDER BY insertion DESC'
         );
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
