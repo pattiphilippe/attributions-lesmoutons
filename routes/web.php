@@ -20,3 +20,4 @@ Route::resource('professeurs', 'ProfesseurController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/commits', 'CommitController@index')->name('commits');

@@ -24,6 +24,20 @@
                         </div>
                     </a>
 
+                    <a class="action border rounded" href="/commits">
+                        <div class="action-logo">
+                            <img src="{{ asset('images/commits.png') }}" alt="commits-logo" width="64" height="64">
+                        </div>
+                        <div class="action-body-container">
+                            <div class="action-title">
+                                Liste des commits
+                            </div>
+                            <div class="action-description">
+                                Consulter la liste des commits mis en production par l'équipe.
+                            </div>
+                        </div>
+                    </a>
+
                     <a class="action border rounded" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <div class="action-logo">
