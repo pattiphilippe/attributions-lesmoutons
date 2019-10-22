@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Groupe extends Model
 {
-    protected $primaryKey = "name";
+    protected $primaryKey = "nom";
     protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = false;
 }
