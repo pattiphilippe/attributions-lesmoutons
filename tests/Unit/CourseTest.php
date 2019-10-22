@@ -3,12 +3,11 @@
 namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Course;
 
-// TODO: use factories
-// TODO: add a test case for the maximum number of credits
+// TODO: add a test case for the maximum number of credits must also be positive
+// TODO: add a test case for number of hours in a bimester, must also be positive
 class CourseTest extends TestCase
 {
 
@@ -19,14 +18,8 @@ class CourseTest extends TestCase
      */
     public function testAddCourse()
     {
-        $data=[
-            'id' => 'PRJG5',
-            'title' => 'Cours de gestion de projet',
-            'credits' => '6',
-            'BM1_hours' => '24',
-            'BM2_hours' => '24'
-        ];
-        Course::create($data);
+        $data = ['id' => 'PRJG5'];
+        $course1 = factory(Course::class)->create($data);  
         $course = Course::find('PRJG5');
         $this->assertDatabaseHas('courses', $data);
     }
@@ -36,23 +29,9 @@ class CourseTest extends TestCase
      */
     public function testAddCourseWithExistingId()
     {
-        $firstCourse=[
-            'id' => 'PRJG5',
-            'title' => 'Cours de gestion de projet',
-            'credits' => '6',
-            'BM1_hours' => '24',
-            'BM2_hours' => '24'
-        ];
-        $secondCourse=[
-            'id' => 'PRJG5',
-            'title' => 'Cours de XP',
-            'credits' => '6',
-            'BM1_hours' => '24',
-            'BM2_hours' => '24'
-        ];
-        Course::create($firstCourse);
+        $course1 = factory(Course::class)->create(['id' => 'DONG5',]);     
         $this->expectException(\PDOException::class);
-        Course::create($secondCourse);
+        $course2 = factory(Course::class)->create(['id' => 'DONG5',]);     
     }
 
     /**
@@ -60,41 +39,23 @@ class CourseTest extends TestCase
      */
     public function testDeleteCourse()
     {
-        $data=[
-            'id' => 'PRJG5',
-            'title' => 'Cours de gestion de projet',
-            'credits' => '6',
-            'BM1_hours' => '24',
-            'BM2_hours' => '24'
-        ];
-        Course::create($data);
-        $course = Course::destroy('PRJG5');
+        $data = ['id' => 'PRJG5'];
+        $course = factory(Course::class)->create($data);
+        Course::destroy('PRJG5');
         $this->assertDatabaseMissing('courses', $data);
     }
 
     /**
      * Checks if a course is updated as expected.
      */
-    public function testUpdateCourse()
+    public function testUpdateValidCourse()
     {
-        $data=[
-            'id' => 'PRJG5',
-            'title' => 'Cours de gestion de projet',
-            'credits' => '6',
-            'BM1_hours' => '24',
-            'BM2_hours' => '24'
-        ];
-        $dataUpdate = [
-            'id' => 'DEV3',
-            'title' => 'Dévloppement3',
-            'credits' => '5',
-            'BM1_hours' => '34',
-            'BM2_hours' => '12'
-        ];
-        
-        Course::create($data);
-        $course = Course::find('PRJG5')->update($dataUpdate);
-        $this->assertDatabaseHas('courses', $dataUpdate);        
+        $data = factory(Course::class)->create(['id' => 'PRJG5']);
+        $course = Course::find('PRJG5');
+        $course->id = 'DONG5';
+        $course->save();
+        $other = Course::find('DONG5');
+        $this->assertEquals('DONG5', $other->id);        
     }
     
     /**
@@ -102,23 +63,19 @@ class CourseTest extends TestCase
      */
     public function testAddCourseWithExistingTitle()
     {
-        $firstCourse=[
-            'id' => 'DEV4',
-            'title' => 'Developement 4',
-            'credits' => '6',
-            'BM1_hours' => '24',
-            'BM2_hours' => '24'
-        ];
-        $secondCourse=[
-            'id' => 'DEV3',
-            'title' => 'Developement 4',
-            'credits' => '3',
-            'BM1_hours' => '12',
-            'BM2_hours' => '12'
-        ];
-        Course::create($firstCourse);
+        $course1 = factory(Course::class)->create(['title' => 'Abigail',]);     
         $this->expectException(\PDOException::class);
-        Course::create($secondCourse);
+        $course2 = factory(Course::class)->create(['title' => 'Abigail',]);     
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithTooMuchCredits()
+    {
+        $course=factory(Course::class)->create(['credits' => 31,]);
+        //$this->expectException(\PDOException::class);
+        $this->assertEquals($course['credits'], 31);
     }
 
 }

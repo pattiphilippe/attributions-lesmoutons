@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 })->name('accueil');
 
-Route::resource('professeurs', 'ProfesseurController');
+Route::resource('professors', 'ProfesseurController');

@@ -16,10 +16,12 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->string('id', 5)->primary();
             $table->string('title',100)->unique();
-            $table->integer('credits')->unsigned(); //TODO : max = 60.
-            $table->integer('BM1_hours')->unsigned();
-            $table->integer('BM2_hours')->unsigned();
+            $table->integer('credits'); //TODO : max = 30.
+            $table->integer('BM1_hours');//todo
+            $table->integer('BM2_hours');//todo
         });
+        DB::statement("ALTER TABLE courses ADD CONSTRAINT check_max_credits CHECK(credits BETWEEN 0 AND 30)");
+        //mysql ignore check option https://stackoverflow.com/questions/38223158/laravel-migration-adding-check-constraints-in-table
     }
 
     /**
