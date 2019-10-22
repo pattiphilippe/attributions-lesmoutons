@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+//namespace Tests\Unit;
 
 use App\Professeur;
 
@@ -53,14 +53,52 @@ class ProfesseursTest extends TestCase
 
     public function testInsertProfessorWithSameId() 
     {
-        $this->expectExceptionMessage("two acronyme same");
+        $this->expectException(\PDOException::class);
 
-        $professor1 = factory(App\Professeur::class)->make([
+        $professor1 = factory(App\Professeur::class)->create([
             'acronyme' => 'ABS',
             'nom' => 'Absil',
             'prenom' => 'Romain'
         ]);
     }
 
+    public function testDeleteProfessor()
+    {
+        $professor1 = factory(\App\Professeur::class)->create([
+            'acronyme' => 'SDR',
+            'nom' => 'Drosbisz',
+            'prenom' => 'Sebastien'
+        ]);
+
+        Professeur::destroy('SDR');
+
+        $this->assertDatabaseMissing('professeurs', [
+            'acronyme' => 'SDR',
+            'nom' => 'Drosbisz',
+            'prenom' => 'Sebastien',
+        ]);
+    }
+
+
+    public function testUpdateProfessor() 
+    {
+
+        $professor1 = factory(\App\Professeur::class)->create([
+            'acronyme' => 'ARO',
+            'nom' => 'Rousseau',
+            'prenom' => 'Anne'
+        ]);
+
+        $professorToUpdate = Professeur::find('ARO');
+        
+        $professorToUpdate->prenom = 'Patricia';
+        $professorToUpdate->save();
+       
+        $this->assertDatabaseHas('professeurs', [
+            'acronyme' => 'ARO',
+            'nom' => 'Rousseau',
+            'prenom' => 'Patricia'
+        ]);
+    }
 
 }
