@@ -56,4 +56,29 @@ class GroupeTest extends TestCase
         ]);
 
     }
+
+    public function testDeleteGroupe()
+    {
+        $group = factory(\App\Groupe::class)->create();
+        Groupe::destroy($group->nom);
+        $this->assertDatabaseMissing('groupes', [
+            'nom' => $group->nom,
+        ]);
+    }
+
+
+    public function testUpdateGroupe() 
+    {
+        $group = factory(\App\Groupe::class)->create();
+
+        $newName = 'Patricia';
+        $groupToUpdate = Groupe::find($group->nom);
+        $groupToUpdate->nom = $newName;
+        $groupToUpdate->save();
+       
+        $this->assertDatabaseHas('groupes', [
+            'nom' => $newName,
+        ]);
+    }
+
 }
