@@ -21,19 +21,30 @@ class GroupesTableSeeder extends Seeder
             ],
             [
                 'nom' => 'A11'
-
             ],
             [
                 'nom' => 'A111'
-
             ],
             [
-                'nom' => 'A1111'
-
+                'nom' => 'A112'
             ],
             [
-                'nom' => 'A11111'
-
+                'nom' => 'B1'
+            ],
+            [
+                'nom' => 'B11'
+            ],
+            [
+                'nom' => 'B111'
+            ],
+            [
+                'nom' => 'B112'
+            ],
+            [
+                'nom' => 'B2'
+            ],
+            [
+                'nom' => 'B21'
             ],
         ]);
     }

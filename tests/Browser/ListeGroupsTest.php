@@ -8,16 +8,57 @@ use Tests\DuskTestCase;
 
 class ListeGroupsTest extends DuskTestCase
 {
+
     /**
-     * A Dusk test example.
+     * testContainsSeederInfo
      *
      * @return void
      */
-    public function testExample()
+    public function testTitle()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/groupes')
-                    ->assertSee('A');
+                    ->assertSee('Liste de groupes');
+        });
+    }
+    
+    /**
+     * testGroupsReturnAccueil
+     *
+     * @return void
+     */
+    public function testGroupsReturnAccueil()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/groupes')
+                    ->assertSee('Liste de groupes')
+                    ->press('#accueilBtn')
+                    ->assertRouteIs('accueil');
+        });
+    }
+
+
+
+    /**
+     * testContainsSeederInfo
+     *
+     * @return void
+     */
+    public function testContainsSeederInfo()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/groupes')
+                    ->assertSee('Liste de groupes')
+                    ->assertSee('A1')
+                    ->assertSee('A11')
+                    ->assertSee('A111')
+                    ->assertSee('A112')
+                    ->assertSee('B1')
+                    ->assertSee('B11')
+                    ->assertSee('B111')
+                    ->assertSee('B112')
+                    ->assertSee('B2')
+                    ->assertSee('B21');
         });
     }
 }
