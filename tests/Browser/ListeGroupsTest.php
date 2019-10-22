@@ -9,6 +9,8 @@ use Tests\DuskTestCase;
 class ListeGroupsTest extends DuskTestCase
 {
 
+    use DatabaseMigrations;
+
     public function setUp() : void
     {
         parent::setUp();
@@ -43,28 +45,4 @@ class ListeGroupsTest extends DuskTestCase
         });
     }
 
-
-
-    /**
-     * testContainsSeederInfo
-     *
-     * @return void
-     */
-    public function testContainsSeederInfo()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/groupes')
-                    ->assertSee('Liste de groupes')
-                    ->assertSee('A1')
-                    ->assertSee('A11')
-                    ->assertSee('A111')
-                    ->assertSee('A112')
-                    ->assertSee('B1')
-                    ->assertSee('B11')
-                    ->assertSee('B111')
-                    ->assertSee('B112')
-                    ->assertSee('B2')
-                    ->assertSee('B21');
-        });
-    }
 }
