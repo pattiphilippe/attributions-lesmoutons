@@ -88,7 +88,9 @@ class ProfesseurController extends Controller
 
     public function uploadFile(Request $request)
     {
-        if ($request->input('submit') != null) {
+        if ($request->file == null) {
+            Session::flash('message', 'Please choose a file');
+        } else if ($request->input('submit') != null) {
 
             $file = $request->file('file');
 
