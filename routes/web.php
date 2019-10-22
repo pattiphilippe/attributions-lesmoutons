@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/commits', 'CommitController@index')->name('commits');
+
+Route::post('/uploadFile', 'ProfesseurController@uploadFile');

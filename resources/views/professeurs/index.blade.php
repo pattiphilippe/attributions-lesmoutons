@@ -5,6 +5,10 @@
 @section('content')
 <h1>Liste de professeurs</h1>
 
+@if(Session::has('message'))
+    <p>{{ Session::get('message') }}</p>
+@endif
+
 <table id="table-professeurs-list" class="table">
     <thead>
         <tr>
@@ -23,6 +27,14 @@
         @endforeach
     </tbody>
 </table>
+
+<!-- Form -->
+<form method='post' action='/uploadFile' enctype='multipart/form-data' >
+    {{ csrf_field() }}
+    <input id="file-button" type='file' name='file' >
+    <input type='submit' name='submit' value='Import'>
+</form>
+
 <div class="buttonBloc">
     <button type="button" onclick="window.location='{{ route('accueil') }}' "> > vers accueil </button>
     {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}

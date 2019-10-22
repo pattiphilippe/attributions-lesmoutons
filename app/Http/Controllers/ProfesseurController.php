@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Professeur;
 use Illuminate\Http\Request;
+use Session;
 
 class ProfesseurController extends Controller
 {
@@ -83,5 +84,64 @@ class ProfesseurController extends Controller
     public function destroy(Professeur $professeur)
     {
         //
+    }
+
+    public function uploadFile(Request $request)
+    {
+        if ($request->input('submit') != null) {
+
+            $file = $request->file('file');
+
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+
+            $valid_extension = array("csv");
+
+            $maxFileSize = 2097152;
+            if (in_array(strtolower($extension), $valid_extension)) {
+                if ($fileSize <= $maxFileSize) {
+
+                    $location = 'uploads';
+
+                    $filepath = public_path($location . "/" . $filename);
+
+                    $file = fopen($filepath, "r");
+
+                    $importData_arr = array();
+                    $i = 0;
+                    while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+                        $num = count($filedata);
+
+                        if ($i == 0) {
+                            $i++;
+                            continue;
+                        }
+                        for ($c = 0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata[$c];
+                        }
+                        $i++;
+                    }
+                    fclose($file);
+
+                    foreach ($importData_arr as $importData) {
+
+                        $insertData = array(
+                            "acronyme" => $importData[0],
+                            "nom" => $importData[1],
+                            "prenom" => $importData[2]);
+                        Professeur::insertData($insertData);
+                    }
+                    Session::flash('message', 'Import Successful.');
+                } else {
+                    Session::flash('message', 'File too large. File must be less than 2MB.');
+                }
+            } else {
+                Session::flash('message', 'Invalid File Extension.');
+            }
+        }
+        return redirect('professeurs');
     }
 }
