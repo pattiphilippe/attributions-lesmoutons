@@ -19,7 +19,7 @@
                                 Professeurs
                             </div>
                             <div class="action-description">
-                                Liste de professeurs
+                                Liste de professeurs.
                             </div>
                         </div>
                     </a>
@@ -34,6 +34,19 @@
                             </div>
                             <div class="action-description">
                                 Consulter la liste des commits mis en production par l'équipe.
+                            </div>
+                        </div>
+                    </a>
+                    <a class="action border rounded" href="/groupes">
+                        <div class="action-logo">
+                            <img src="{{ asset('images/groups.png') }}" alt="groupes-logo" width="64" height="64">
+                        </div>
+                        <div class="action-body-container">
+                            <div class="action-title">
+                                Groupes
+                            </div>
+                            <div class="action-description">
+                                Liste des groupes.
                             </div>
                         </div>
                     </a>
