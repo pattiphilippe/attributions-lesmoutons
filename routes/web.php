@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/commits', 'CommitController@index')->name('commits');
 Route::resource('groupes','GroupController');
+Route::get('/courses', 'CourseController@index');

@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb01914c61eed65ddb8a288bd9cb0e52",
-
+    "content-hash": "3889d606fc492ce411d14dff9800fa40",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3405,6 +3404,7 @@
             "time": "2019-09-24T20:30:07+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "laravel/ui",
             "version": "v1.1.1",
             "source": {
@@ -3462,6 +3462,8 @@
             "time": "2019-10-11T12:16:52+00:00"
         },
         {
+=======
+>>>>>>> origin/courses_list
             "name": "mockery/mockery",
             "version": "1.2.4",
             "source": {
