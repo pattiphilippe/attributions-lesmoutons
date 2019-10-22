@@ -1,14 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "eb01914c61eed65ddb8a288bd9cb0e52",
-=======
-    "content-hash": "3889d606fc492ce411d14dff9800fa40",
->>>>>>> professor_list_hind_philippe
+
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3409,6 +3406,7 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "name": "laravel/ui",
             "version": "v1.1.1",
             "source": {
@@ -3468,6 +3466,8 @@
         {
 =======
 >>>>>>> professor_list_hind_philippe
+=======
+>>>>>>> listGroups
             "name": "mockery/mockery",
             "version": "1.2.4",
             "source": {
