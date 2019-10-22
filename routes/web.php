@@ -16,3 +16,4 @@ Route::get('/', function () {
 })->name('accueil');
 
 Route::resource('professors', 'ProfesseurController');
+Route::get('/courses', 'CourseController@index');
