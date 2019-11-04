@@ -10,7 +10,7 @@ class ProfessorCSVTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_import_file_wrong_content()
+    public function test_import_file_empty()
     {
         $user = Factory('App\User')->create();
         $this->actingAs($user);
@@ -21,8 +21,8 @@ class ProfessorCSVTest extends TestCase
             'file' => $file,
         ]);
 
-        $response->assertSessionHas('warning', 'The content of the file is inappropriate and cannot be processed. Check if it\'s well formated and the data is correct');
-        $response->assertSessionMissing('success');
+        $response->assertSessionHas('success', 'Import Successful');
+        $response->assertSessionMissing('warning');
     }
 
     public function test_import_file_missing()
