@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Professeur;
+use App\Utilitaries\Util;
 use Illuminate\Http\Request;
 
 class ProfesseurController extends Controller
@@ -83,5 +84,14 @@ class ProfesseurController extends Controller
     public function destroy(Professeur $professeur)
     {
         //
+    }
+
+    public function uploadFile(Request $request)
+    {
+        Util::handleCSVInsertion($request, [
+            "acronyme", "nom", "prenom",
+        ], Professeur::class);
+
+        return redirect('professeurs');
     }
 }

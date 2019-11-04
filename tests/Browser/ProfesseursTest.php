@@ -11,8 +11,7 @@ class ProfesseursTest extends DuskTestCase
 
     use DatabaseMigrations;
 
-
-    public function setUp() : void
+    public function setUp(): void
     {
 
         parent::setUp();
@@ -24,11 +23,14 @@ class ProfesseursTest extends DuskTestCase
      *
      * @return void
      */
-   public function testProfesseursPage()
+    public function testProfesseursPage()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/professeurs')
-            ->assertSee('Liste de professeurs');
+        $user = factory(\App\User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/professeurs')
+                ->assertSee('Liste de professeurs');
         });
     }
 
@@ -39,14 +41,17 @@ class ProfesseursTest extends DuskTestCase
      */
     public function testProfesseursReturnAccueil()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/professeurs')
-            ->assertSee('Liste de professeurs')
-            ->press('#accueilBtn')
-            ->assertRouteIs('accueil');
+        $user = factory(\App\User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/professeurs')
+                ->assertSee('Liste de professeurs')
+                ->press('#accueilBtn')
+                ->assertRouteIs('home');
         });
     }
-    
+
     /**
      * testProfesseursContainsSeederInfo
      *
@@ -54,11 +59,13 @@ class ProfesseursTest extends DuskTestCase
      */
     public function testProfesseursContainsSeederInfo()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/professeurs')
-            ->assertSee('Liste de professeurs');
+        $user = factory(\App\User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/professeurs')
+                ->assertSee('Liste de professeurs');
         });
     }
-
 
 }

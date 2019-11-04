@@ -13,13 +13,17 @@
 
 Route::get('/', function () {
     return view('auth.login');
-})->middleware('guest')->name('accueil');
-
-Route::resource('professeurs', 'ProfesseurController');
+})->middleware('guest')->name('index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/commits', 'CommitController@index')->name('commits');
-Route::resource('groupes','GroupController');
-Route::get('/courses', 'CourseController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('professeurs', 'ProfesseurController');
+    Route::resource('groupes', 'GroupController');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/commits', 'CommitController@index')->name('commits');
+    Route::get('/courses', 'CourseController@index');
+
+    Route::post('/uploadFile', 'ProfesseurController@uploadFile');
+});

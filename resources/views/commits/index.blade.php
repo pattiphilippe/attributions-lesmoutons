@@ -5,7 +5,7 @@
 @section('content')
 <h1>Liste des commits</h1>
 
-<table id="table-professeurs-list" class="table">
+<table id="table-professors-list" class="table">
     <thead>
         <tr>
             <th>Identifiant</th>
@@ -26,7 +26,7 @@
     </tbody>
 </table>
 <div class="buttonBloc">
-    <button type="button" onclick="window.location='{{ route('accueil') }}' "> > vers accueil </button>
+    <button type="button" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>
     {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
 </div>
 @endsection

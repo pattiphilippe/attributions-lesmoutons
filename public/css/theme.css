@@ -127,7 +127,7 @@ form {
     text-align: center
 }
 
-#table-professeurs-list tr:hover {
+#table-professors-list tr:hover {
     background-color: lightsteelblue;
 }
 
@@ -168,4 +168,8 @@ a.action {
 
 .action-body-container {
     flex: 10;
+}
+
+.csv-messages {
+    margin-top: 30px;
 }

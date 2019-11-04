@@ -11,7 +11,7 @@ class ListeGroupsTest extends DuskTestCase
 
     use DatabaseMigrations;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -24,12 +24,15 @@ class ListeGroupsTest extends DuskTestCase
      */
     public function testTitle()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/groupes')
-                    ->assertSee('Liste de groupes');
+        $user = factory(\App\User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/groupes')
+                ->assertSee('Liste de groupes');
         });
     }
-    
+
     /**
      * testGroupsReturnAccueil
      *
@@ -37,11 +40,14 @@ class ListeGroupsTest extends DuskTestCase
      */
     public function testGroupsReturnAccueil()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/groupes')
-                    ->assertSee('Liste de groupes')
-                    ->press('#accueilBtn')
-                    ->assertRouteIs('accueil');
+        $user = factory(\App\User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/groupes')
+                ->assertSee('Liste de groupes')
+                ->press('#accueilBtn')
+                ->assertRouteIs('home');
         });
     }
 
