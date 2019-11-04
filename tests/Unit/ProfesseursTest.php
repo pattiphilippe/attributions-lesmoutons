@@ -28,7 +28,8 @@ class ProfesseursTest extends TestCase
     }
 
     public function testCountProfessors() {
-        $this->assertEquals(5, Professeur::count());
+        $professor = factory(\App\Professeur::class)->create();
+        $this->assertEquals(1, Professeur::count());
     }
 
     public function testInsertIntoProfessors() 
@@ -48,14 +49,18 @@ class ProfesseursTest extends TestCase
 
         $count = DB::table('professeurs')->count();
 
-        $this->assertEquals($count, 105);
+        $this->assertEquals($count, 100);
     }
 
     public function testInsertProfessorWithSameId() 
     {
         $this->expectException(\PDOException::class);
-
-        $professor1 = factory(App\Professeur::class)->create([
+        $professor1 = factory(\App\Professeur::class)->create([
+            'acronyme' => 'ABS',
+            'nom' => 'Absil',
+            'prenom' => 'Romain'
+        ]);
+        $professor2 = factory(\App\Professeur::class)->create([
             'acronyme' => 'ABS',
             'nom' => 'Absil',
             'prenom' => 'Romain'
