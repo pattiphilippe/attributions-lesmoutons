@@ -25,5 +25,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/commits', 'CommitController@index')->name('commits');
     Route::get('/courses', 'CourseController@index');
 
-    Route::post('/uploadFile', 'ProfesseurController@uploadFile');
+    Route::post('/uploadFileProfessor', 'ProfesseurController@uploadFileProfessor')->name('upload_professor');
 });

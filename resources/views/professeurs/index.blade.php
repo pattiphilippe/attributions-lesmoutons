@@ -35,14 +35,14 @@
 </table>
 
 <!-- Form -->
-<form method='post' action='/uploadFile' enctype='multipart/form-data'>
+<form method='post' action='{{ route('upload_professor') }}' enctype='multipart/form-data'>
     @csrf
     <div class="input-group">
         <div class="input-group-prepend">
             <input class="btn btn-info" type='submit' name='submit' value='Import' id='import-csv-button'> </div>
         <div class="custom-file">
-            <input type="file" name="file" class="custom-file-input" id="import-csv-prof">
-            <label class="custom-file-label" for="import-csv-prof">Choose csv file</label>
+            <input type="file" name="file" class="custom-file-input" id="import-csv">
+            <label class="custom-file-label" for="import-csv">Choose csv file</label>
         </div>
     </div>
 </form>
@@ -55,7 +55,7 @@
 </div>
 
 <script>
-    $("#import-csv-prof").on("change", function() {
+    $("#import-csv").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });

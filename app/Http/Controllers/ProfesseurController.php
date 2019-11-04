@@ -86,7 +86,7 @@ class ProfesseurController extends Controller
         //
     }
 
-    public function uploadFile(Request $request)
+    public function uploadFileProfessor(Request $request)
     {
         Util::handleCSVInsertion($request, [
             "acronyme", "nom", "prenom",

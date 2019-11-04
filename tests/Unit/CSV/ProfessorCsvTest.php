@@ -17,7 +17,7 @@ class ProfessorCSVTest extends TestCase
 
         $file = UploadedFile::fake()->create('uploads/csv_import_prof.csv', 24);
 
-        $response = $this->json('POST', '/uploadFile', [
+        $response = $this->json('POST', '/uploadFileProfessor', [
             'file' => $file,
         ]);
 
@@ -32,7 +32,7 @@ class ProfessorCSVTest extends TestCase
 
         $file = UploadedFile::fake()->create('uploads/csv_import_prof.csv', 24);
 
-        $response = $this->json('POST', '/uploadFile', [
+        $response = $this->json('POST', '/uploadFileProfessor', [
             // 'file' => $file,
         ]);
 
@@ -47,7 +47,7 @@ class ProfessorCSVTest extends TestCase
 
         $file = UploadedFile::fake()->create('uploads/csv_import_prof.csv', 2897152);
 
-        $response = $this->json('POST', '/uploadFile', [
+        $response = $this->json('POST', '/uploadFileProfessor', [
             'file' => $file,
         ]);
 
@@ -62,7 +62,7 @@ class ProfessorCSVTest extends TestCase
 
         $file = UploadedFile::fake()->create('csv_import_prof.pdf', 24);
 
-        $response = $this->json('POST', '/uploadFile', [
+        $response = $this->json('POST', '/uploadFileProfessor', [
             'file' => $file,
         ]);
 
