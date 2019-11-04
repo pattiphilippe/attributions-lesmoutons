@@ -70,48 +70,4 @@ class ProfessorCSVTest extends TestCase
         $response->assertSessionMissing('success');
     }
 
-    // public function test_import_file()
-    // {
-    //     $user = Factory('App\User')->create();
-    //     $this->actingAs($user);
-
-    //     Storage::fake('local');
-
-    //     $filePath = 'random_prof.csv';
-
-    //     file_put_contents($filePath, "acronyme,nom,prenom\nJDO,Doe,John");
-
-    //     // $fileContent = array(
-    //     //     array("acronyme", "nom", "prenom"),
-    //     //     array("JDO", "Doe", "John"),
-    //     // );
-
-    //     // $file = UploadedFile::fake()->create('uploads/csv_import_prof.csv', 24);
-
-    //     // dd($file);
-
-    //     // foreach ($fileContent as $line) {
-    //     //     fputcsv($file->tempFile, $line);
-    //     // }
-
-    //     $response = $this->json('POST', '/uploadFile', [
-    //         // 'file' => $file,
-    //         'file' => new UploadedFile($filePath, 'random_prof.csv', null, null, null, true),
-    //     ]);
-
-    //     dd($this->app['session.store']);
-
-    //     // $response->dump();
-    //     // $response->dumpHeaders();
-
-    //     $response->assertSessionHas('success');
-    //     // $response->assertSessionMissing('warning');
-
-    //     // Storage::disk('local')->assertExists($file->hashName());
-    //     $this->assertDatabaseHas('professeurs', [
-    //         'acronyme' => 'JDO',
-    //         'nom' => 'Doe',
-    //         'prenom' => 'John',
-    //     ]);
-    // }
 }

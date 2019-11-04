@@ -75,8 +75,6 @@ class Util
 
                         Session::flash('success', 'Import Successful');
                     } catch (Exception $e) {
-                        // return back()->withError($e->getMessage())->withInput();
-                        // Session::flash('warning', $e->getMessage());
                         Session::flash('warning', 'The content of the file is inappropriate and cannot be processed. Check if it\'s well formated and the data is correct');
                     }
                 } else {
