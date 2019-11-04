@@ -50,7 +50,19 @@
                             </div>
                         </div>
                     </a>
-
+                    <a class="action border rounded" href="/courses">
+                        <div class="action-logo">
+                            <img src="{{ asset('images/courses.png') }}" alt="courses-logo" width="64" height="64">
+                        </div>
+                        <div class="action-body-container">
+                            <div class="action-title">
+                                Cours
+                            </div>
+                            <div class="action-description">
+                                Liste des cours.
+                            </div>
+                        </div>
+                    </a>
                     <a class="action border rounded" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <div class="action-logo">
