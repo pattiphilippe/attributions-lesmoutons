@@ -43,7 +43,7 @@ class Util
                     try {
                         $location = 'uploads';
                         $file->move($location, $filename);
-                        $filepath = public_path($location . "/" . $filename);
+                        $filepath = $location . "/" . $filename;
                         $file = fopen($filepath, "r");
                         $importData_arr = array();
                         $i = 0;
