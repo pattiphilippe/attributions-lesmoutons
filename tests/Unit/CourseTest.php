@@ -76,4 +76,77 @@ class CourseTest extends TestCase
         $this->expectException(\PDOException::class);
         $course = factory(Course::class)->create(['credits' => 31,]);
     }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithNegativeCredits()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['credits' => -5,]);
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithNoCredits()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['credits' => 0,]);
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithNoBm1Hours()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['bm1_hours' => 0]);
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithNoBm2Hours()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['bm2_hours' => 0]);
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithNegativeBm1Hours()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['bm1_hours' => -100]);
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithNegativeBm2Hours()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['bm2_hours' => -200]);
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithTooManyBm1Hours()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['bm1_hours' => 226]);
+    }
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    public function testAddCourseWithTooManyBm2Hours()
+    {
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['bm2_hours' => 226]);
+    }
+
 }
