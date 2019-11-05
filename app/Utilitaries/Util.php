@@ -17,6 +17,7 @@ class Util
      */
     public static function handleCSVInsertion($request, $attributes, $model)
     {
+        try{
         if ($request->file == null) {
             Session::flash('warning', 'Please choose a file');
         } else {
@@ -40,7 +41,6 @@ class Util
 
                 // Check file size
                 if ($fileSize <= $maxFileSize) {
-                    try {
                         $location = 'uploads';
                         $file->move($location, $filename);
                         $filepath = $location . "/" . $filename;
@@ -74,15 +74,17 @@ class Util
                         }
 
                         Session::flash('success', 'Import Successful');
-                    } catch (Exception $e) {
-                        Session::flash('warning', 'The content of the file is inappropriate and cannot be processed. Check if it\'s well formated and the data is correct');
-                    }
+                    
                 } else {
                     Session::flash('warning', 'File too large. File must be less than 2MB');
                 }
             } else {
                 Session::flash('warning', 'Invalid File Extension');
             }
+        }
+        }catch(Exception $e){
+            Session::flash('warning', 'The content of the file is inappropriate and cannot be processed. Check if it\'s well formated and the data is correct');
+
         }
     }
 
