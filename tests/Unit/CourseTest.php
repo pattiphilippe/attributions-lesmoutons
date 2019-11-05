@@ -68,12 +68,4 @@ class CourseTest extends TestCase
         $course2 = factory(Course::class)->create(['title' => 'Abigail',]);
     }
 
-    /**
-     * Expects a PDOException on constraint violation.
-     */
-    public function testAddCourseWithTooMuchCredits()
-    {
-        $this->expectException(\PDOException::class);
-        $course = factory(Course::class)->create(['credits' => 31,]);
-    }
 }
