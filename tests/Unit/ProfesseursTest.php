@@ -6,7 +6,7 @@ use App\Professeur;
 
 use database\Factory\ProfesseursFactory;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -15,17 +15,7 @@ use Illuminate\Support\Facades\DB;
 class ProfesseursTest extends TestCase
 {
 
-    use DatabaseTransactions;
-
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
+    use RefreshDatabase;
 
     public function testCountProfessors() {
         $professor = factory(\App\Professeur::class)->create();
@@ -54,55 +44,55 @@ class ProfesseursTest extends TestCase
 
     public function testInsertProfessorWithSameId() 
     {
-        $this->expectException(\PDOException::class);
-        $professor1 = factory(\App\Professeur::class)->create([
+        $professor = factory(\App\Professeur::class)->create([
             'acronyme' => 'ABS',
             'nom' => 'Absil',
             'prenom' => 'Romain'
         ]);
-        $professor2 = factory(\App\Professeur::class)->create([
-            'acronyme' => 'ABS',
-            'nom' => 'Absil',
-            'prenom' => 'Romain'
+        $this->expectException(\PDOException::class);
+        factory(\App\Professeur::class)->create([
+            'acronyme' => $professor->acronyme,
+            'nom' => 'Not Absil',
+            'prenom' => 'Not Romain'
         ]);
     }
 
     public function testDeleteProfessor()
     {
-        $professor1 = factory(\App\Professeur::class)->create([
+        $professor = factory(\App\Professeur::class)->create([
             'acronyme' => 'SDR',
             'nom' => 'Drosbisz',
             'prenom' => 'Sebastien'
         ]);
 
-        Professeur::destroy('SDR');
+        Professeur::destroy($professor->acronyme);
 
         $this->assertDatabaseMissing('professeurs', [
-            'acronyme' => 'SDR',
-            'nom' => 'Drosbisz',
-            'prenom' => 'Sebastien',
+            'acronyme' => $professor->acronyme,
+            'nom' => $professor->nom,
+            'prenom' => $professor->prenom
         ]);
     }
 
 
     public function testUpdateProfessor() 
     {
-
-        $professor1 = factory(\App\Professeur::class)->create([
+        $professor = factory(\App\Professeur::class)->create([
             'acronyme' => 'ARO',
             'nom' => 'Rousseau',
             'prenom' => 'Anne'
         ]);
 
-        $professorToUpdate = Professeur::find('ARO');
+        $professorToUpdate = Professeur::find($professor->acronyme);
         
-        $professorToUpdate->prenom = 'Patricia';
+        $nouveauPrenom = 'Patricia';
+        $professorToUpdate->prenom = $nouveauPrenom;
         $professorToUpdate->save();
        
         $this->assertDatabaseHas('professeurs', [
-            'acronyme' => 'ARO',
-            'nom' => 'Rousseau',
-            'prenom' => 'Patricia'
+            'acronyme' => $professor->acronyme,
+            'nom' => $professor->nom,
+            'prenom' => $nouveauPrenom
         ]);
     }
 

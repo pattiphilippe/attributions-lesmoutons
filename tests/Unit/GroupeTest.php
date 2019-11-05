@@ -13,13 +13,13 @@ class GroupeTest extends TestCase
 
     use RefreshDatabase;
 
-    public function testInsertIntoGroupes() 
+    public function testInsertIntoGroupes()
     {
-       $groupe = factory(\App\Groupe::class)->create();
+        $groupe = factory(\App\Groupe::class)->create();
 
-       $this->assertDatabaseHas('groupes', [
-           'nom' => $groupe->nom,
-       ]);
+        $this->assertDatabaseHas('groupes', [
+            'nom' => $groupe->nom,
+        ]);
     }
 
     public function testInsertMultipleIntoGroupes()
@@ -33,13 +33,11 @@ class GroupeTest extends TestCase
 
     public function testUniqueName()
     {
-
         $group = factory(\App\Groupe::class)->create();
         $this->expectException(\PDOException::class);
         factory(\App\Groupe::class)->create([
             'nom' => $group->nom,
         ]);
-
     }
 
     public function testDeleteGroupe()
@@ -52,7 +50,7 @@ class GroupeTest extends TestCase
     }
 
 
-    public function testUpdateGroupe() 
+    public function testUpdateGroupe()
     {
         $group = factory(\App\Groupe::class)->create();
 
@@ -60,10 +58,9 @@ class GroupeTest extends TestCase
         $groupToUpdate = Groupe::find($group->nom);
         $groupToUpdate->nom = $newName;
         $groupToUpdate->save();
-       
+
         $this->assertDatabaseHas('groupes', [
             'nom' => $newName,
         ]);
     }
-
 }
