@@ -2,10 +2,10 @@
 
 namespace Tests\Browser;
 
+use App\Course;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Course;
 
 class CoursesListTest extends DuskTestCase
 {
@@ -17,15 +17,17 @@ class CoursesListTest extends DuskTestCase
      */
     public function testWithCourses()
     {
+        $user = factory(\App\User::class)->create();
         factory(Course::class, 100)->create();
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/courses')
-                    ->assertTitle('Liste des Cours')
-                    ->assertSee('Acronyme')
-                    ->assertSee('Titre')
-                    ->assertSee('Ects')
-                    ->assertSee("Nombre d'heures pour le 1er bimestre")
-                    ->assertSee("Nombre d'heures pour le 2e bimestre");
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/courses')
+                ->assertTitle('Liste des Cours')
+                ->assertSee('Acronyme')
+                ->assertSee('Titre')
+                ->assertSee('Ects')
+                ->assertSee("Nombre d'heures pour le 1er bimestre")
+                ->assertSee("Nombre d'heures pour le 2e bimestre");
         });
     }
 
@@ -36,10 +38,12 @@ class CoursesListTest extends DuskTestCase
      */
     public function testWithoutCourses()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/courses')
-                    ->assertTitle('Liste des Cours')
-                    ->assertSee('La liste est un peu vide!');
+        $user = factory(\App\User::class)->create();
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/courses')
+                ->assertTitle('Liste des Cours')
+                ->assertSee('La liste est un peu vide!');
         });
     }
 }

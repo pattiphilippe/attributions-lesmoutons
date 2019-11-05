@@ -6,7 +6,7 @@
 <h1>Liste des Cours</h1>
 @if(count($courses) == 0)
 <h2>La liste est un peu vide!</h2>
-    <p>Pas de cours disponible 😀</p>
+<p>Pas de cours disponible 😀</p>
 @else
 <table id="table-professeurs-list" class="table">
     <thead>
@@ -19,19 +19,19 @@
         </tr>
     </thead>
     <tbody>
-            @foreach ($courses as $course)
-            <tr>
-                <td scope="row">{{$course["id"]}} </td>
-                <td>{{$course["title"]}} </td>
-                <td>{{$course["credits"]}} </td>
-                <td>{{$course["BM1_hours"]}} </td>
-                <td>{{$course["BM2_hours"]}} </td>
-            </tr>
-            @endforeach
+        @foreach ($courses as $course)
+        <tr>
+            <td scope="row">{{$course["id"]}} </td>
+            <td>{{$course["title"]}} </td>
+            <td>{{$course["credits"]}} </td>
+            <td>{{$course["BM1_hours"]}} </td>
+            <td>{{$course["BM2_hours"]}} </td>
+        </tr>
+        @endforeach
     </tbody>
 </table>
 @endif
 <div class="buttonBloc">
-    <button type="button" onclick="window.location='{{ route('accueil') }}' "> > vers accueil </button>
+    <button type="button" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>
 </div>
 @endsection

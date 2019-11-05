@@ -2,9 +2,8 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Groupe;
-
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 use Illuminate\Support\Facades\DB;
@@ -12,29 +11,15 @@ use Illuminate\Support\Facades\DB;
 class GroupeTest extends TestCase
 {
 
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
+    public function testInsertIntoGroupes()
     {
-        $this->assertTrue(true);
-    }
+        $groupe = factory(\App\Groupe::class)->create();
 
-    public function testCountGroupes() {
-        $this->assertEquals(10, Groupe::count());
-    }
-
-    public function testInsertIntoGroupes() 
-    {
-       $groupe = factory(\App\Groupe::class)->create();
-
-       $this->assertDatabaseHas('groupes', [
-           'nom' => $groupe->nom,
-       ]);
+        $this->assertDatabaseHas('groupes', [
+            'nom' => $groupe->nom,
+        ]);
     }
 
     public function testInsertMultipleIntoGroupes()
@@ -43,18 +28,16 @@ class GroupeTest extends TestCase
 
         $count = DB::table('groupes')->count();
 
-        $this->assertEquals($count, 110);
+        $this->assertEquals($count, 100);
     }
 
     public function testUniqueName()
     {
-
         $group = factory(\App\Groupe::class)->create();
         $this->expectException(\PDOException::class);
         factory(\App\Groupe::class)->create([
             'nom' => $group->nom,
         ]);
-
     }
 
     public function testDeleteGroupe()
@@ -67,7 +50,7 @@ class GroupeTest extends TestCase
     }
 
 
-    public function testUpdateGroupe() 
+    public function testUpdateGroupe()
     {
         $group = factory(\App\Groupe::class)->create();
 
@@ -75,10 +58,9 @@ class GroupeTest extends TestCase
         $groupToUpdate = Groupe::find($group->nom);
         $groupToUpdate->nom = $newName;
         $groupToUpdate->save();
-       
+
         $this->assertDatabaseHas('groupes', [
             'nom' => $newName,
         ]);
     }
-
 }

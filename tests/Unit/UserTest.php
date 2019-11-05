@@ -16,14 +16,14 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_accueil()
+    public function test_index()
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
     }
 
-    public function test_connection_reussie()
+    public function test_connection_success()
     {
         $user = factory(User::class)->create();
 
@@ -32,14 +32,14 @@ class UserTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function test_connection_echoue()
+    public function test_connection_failed()
     {
         $this
             ->get('/home')
             ->assertStatus(302);
     }
 
-    public function test_user_existe()
+    public function test_user_exists()
     {
         $user = factory(\App\User::class)->create();
 
@@ -48,7 +48,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_creation_massive()
+    public function test_mass_creation()
     {
         factory(\App\User::class, 100)->create();
 

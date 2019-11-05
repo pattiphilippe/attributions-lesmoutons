@@ -15,7 +15,7 @@ class UserTest extends DuskTestCase
      *
      * @return void
      */
-    public function testAccueil()
+    public function test_index()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -23,7 +23,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testInscription()
+    public function test_register()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -32,7 +32,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testInscriptionEmailDejaPris()
+    public function test_register_email_already_taken()
     {
         $user = factory(\App\User::class)->create([
             'email' => 'test@laravel.com',
@@ -49,7 +49,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testInscriptionMdpConfirmationEchoue()
+    public function test_register_password_confirmation_failed()
     {
         $user = factory(\App\User::class)->create([
             'email' => 'test@laravel.com',
@@ -66,7 +66,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testConnexionEchoue()
+    public function test_connection_failed()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -78,7 +78,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testConnexionChampsVide()
+    public function test_connection_empty_fields()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -92,7 +92,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testInscriptionChampsVide()
+    public function test_register_empty_fields()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
@@ -107,7 +107,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testConnexionReussie()
+    public function test_connection_success()
     {
         $user = factory(\App\User::class)->create([
             'email' => 'test@laravel.com',
@@ -122,7 +122,7 @@ class UserTest extends DuskTestCase
         });
     }
 
-    public function testInscriptionReussie()
+    public function test_register_success()
     {
 
         $this->browse(function ($browser) {
