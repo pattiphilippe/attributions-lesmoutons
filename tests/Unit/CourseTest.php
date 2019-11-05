@@ -19,7 +19,7 @@ class CourseTest extends TestCase
     public function testAddCourse()
     {
         $data = ['id' => 'PRJG5'];
-        $course1 = factory(Course::class)->create($data);  
+        $course1 = factory(Course::class)->create($data);
         $course = Course::find('PRJG5');
         $this->assertDatabaseHas('courses', $data);
     }
@@ -29,9 +29,9 @@ class CourseTest extends TestCase
      */
     public function testAddCourseWithExistingId()
     {
-        $course1 = factory(Course::class)->create(['id' => 'DONG5',]);     
+        $course1 = factory(Course::class)->create(['id' => 'DONG5',]);
         $this->expectException(\PDOException::class);
-        $course2 = factory(Course::class)->create(['id' => 'DONG5',]);     
+        $course2 = factory(Course::class)->create(['id' => 'DONG5',]);
     }
 
     /**
@@ -55,17 +55,17 @@ class CourseTest extends TestCase
         $course->id = 'DONG5';
         $course->save();
         $other = Course::find('DONG5');
-        $this->assertEquals('DONG5', $other->id);        
+        $this->assertEquals('DONG5', $other->id);
     }
-    
+
     /**
      * Expects a PDOException on constraint violation.
      */
     public function testAddCourseWithExistingTitle()
     {
-        $course1 = factory(Course::class)->create(['title' => 'Abigail',]);     
+        $course1 = factory(Course::class)->create(['title' => 'Abigail',]);
         $this->expectException(\PDOException::class);
-        $course2 = factory(Course::class)->create(['title' => 'Abigail',]);     
+        $course2 = factory(Course::class)->create(['title' => 'Abigail',]);
     }
 
     /**
@@ -73,9 +73,7 @@ class CourseTest extends TestCase
      */
     public function testAddCourseWithTooMuchCredits()
     {
-        $course=factory(Course::class)->create(['credits' => 31,]);
-        //$this->expectException(\PDOException::class);
-        $this->assertEquals($course['credits'], 31);
+        $this->expectException(\PDOException::class);
+        $course = factory(Course::class)->create(['credits' => 31,]);
     }
-
 }
