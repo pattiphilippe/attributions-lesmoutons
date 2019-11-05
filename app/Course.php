@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Course extends Model
 {
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     protected $fillable = [
-        'id', 'title', 'credits', 'BM1_hours', 'BM2_hours'
+        'id', 'title', 'credits', 'BM1_hours', 'BM2_hours',
     ];
 
     public $incrementing = false;

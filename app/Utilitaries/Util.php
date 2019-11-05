@@ -17,30 +17,30 @@ class Util
      */
     public static function handleCSVInsertion($request, $attributes, $model)
     {
-        try{
-        if ($request->file == null) {
-            Session::flash('warning', 'Please choose a file');
-        } else {
-            $file = $request->file('file');
+        try {
+            if ($request->file == null) {
+                Session::flash('warning', 'Please choose a file');
+            } else {
+                $file = $request->file('file');
 
-            // File details
-            $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $tempPath = $file->getRealPath();
-            $fileSize = $file->getSize();
-            $mimeType = $file->getMimeType();
+                // File details
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $tempPath = $file->getRealPath();
+                $fileSize = $file->getSize();
+                $mimeType = $file->getMimeType();
 
-            // File extension
-            $valid_extension = array("csv");
+                // File extension
+                $valid_extension = array("csv");
 
-            // 2MB in bytes
-            $maxFileSize = 2097152;
+                // 2MB in bytes
+                $maxFileSize = 2097152;
 
-            // Check file extension
-            if (in_array(strtolower($extension), $valid_extension)) {
+                // Check file extension
+                if (in_array(strtolower($extension), $valid_extension)) {
 
-                // Check file size
-                if ($fileSize <= $maxFileSize) {
+                    // Check file size
+                    if ($fileSize <= $maxFileSize) {
                         $location = 'uploads';
                         $file->move($location, $filename);
                         $filepath = $location . "/" . $filename;
@@ -74,15 +74,15 @@ class Util
                         }
 
                         Session::flash('success', 'Import Successful');
-                    
+
+                    } else {
+                        Session::flash('warning', 'File too large. File must be less than 2MB');
+                    }
                 } else {
-                    Session::flash('warning', 'File too large. File must be less than 2MB');
+                    Session::flash('warning', 'Invalid File Extension');
                 }
-            } else {
-                Session::flash('warning', 'Invalid File Extension');
             }
-        }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Session::flash('warning', 'The content of the file is inappropriate and cannot be processed. Check if it\'s well formated and the data is correct');
 
         }
