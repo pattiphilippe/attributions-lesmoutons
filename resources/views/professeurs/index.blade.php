@@ -14,7 +14,10 @@
 @endif
 
 <h1>Liste de professeurs</h1>
-
+@if (count($professeurs) == 0)
+<h2>La liste est vide</h2>
+<p>Pas de professeur disponible. </p>
+@else
 <table id="table-professors-list" class="table">
     <thead>
         <tr>
@@ -33,6 +36,7 @@
         @endforeach
     </tbody>
 </table>
+@endif
 
 <!-- Form -->
 <form method='post' action='{{ route('upload_professor') }}' enctype='multipart/form-data'>
