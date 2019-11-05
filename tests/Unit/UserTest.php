@@ -48,12 +48,4 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_mass_creation()
-    {
-        factory(\App\User::class, 100)->create();
-
-        $count = DB::table('users')->count();
-
-        $this->assertEquals($count, 100);
-    }
 }
