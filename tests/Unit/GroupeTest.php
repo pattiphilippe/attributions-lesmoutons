@@ -2,9 +2,8 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Groupe;
-
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 use Illuminate\Support\Facades\DB;
@@ -12,21 +11,7 @@ use Illuminate\Support\Facades\DB;
 class GroupeTest extends TestCase
 {
 
-    use DatabaseTransactions;
-
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
-    {
-        $this->assertTrue(true);
-    }
-
-    public function testCountGroupes() {
-        $this->assertEquals(10, Groupe::count());
-    }
+    use RefreshDatabase;
 
     public function testInsertIntoGroupes() 
     {
@@ -43,7 +28,7 @@ class GroupeTest extends TestCase
 
         $count = DB::table('groupes')->count();
 
-        $this->assertEquals($count, 110);
+        $this->assertEquals($count, 100);
     }
 
     public function testUniqueName()
