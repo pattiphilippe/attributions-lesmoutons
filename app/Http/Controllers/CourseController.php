@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use App\Course;
+use App\Attribution;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -13,9 +15,24 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $attributed = $this->getAttributedCourses();
+        $Notattributed = $this->getNoAttributedCourses();
         return view('courses.index', [
             'courses' => Course::all(),
+            'coursesAttribute' => $attributed,
+            'coursesNotAttribute' => $Notattributed,
         ]);
+    }
+
+    public function getAttributedCourses()
+    {
+        $attributed = DB::select('SELECT * FROM courses join attributions on courses.id = attributions.course_id');
+        return $attributed;
+    }
+    public function getNoAttributedCourses()
+    {
+        $Notattributed = DB::select('SELECT * FROM courses Left join attributions on courses.id = attributions.course_id');
+        return $Notattributed;
     }
 
     /**

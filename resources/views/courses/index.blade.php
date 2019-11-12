@@ -1,13 +1,15 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 @extends('layout')
 
 @section('title', 'Liste des Cours')
 
 @section('content')
 <h1>Liste des Cours</h1>
-<select name="option">
-    <option value="all">tout</option>
-    <option value="attributed">attribué(s)</option>
-    <option value="nonAttributed">non-attribué(s)</option>
+<select name="submit">
+    <option value="courses">Tout</option>
+    <option value="coursesAttribute">Attribué(s)</option>
+    <option value="CoursesNotAttributed">Non-attribué(s)</option>
 </select>
 @if(count($courses) == 0)
 <h2>La liste est un peu vide!</h2>
@@ -24,15 +26,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($courses as $course)
-        <tr>
-            <td scope="row">{{$course["id"]}} </td>
-            <td>{{$course["title"]}} </td>
-            <td>{{$course["credits"]}} </td>
-            <td>{{$course["bm1_hours"]}} </td>
-            <td>{{$course["bm2_hours"]}} </td>
-        </tr>
-        @endforeach
+            @foreach ($courses as $course)
+            <tr>
+                <td scope="row">{{$course["id"]}} </td>
+                <td>{{$course["title"]}} </td>
+                <td>{{$course["credits"]}} </td>
+                <td>{{$course["bm1_hours"]}} </td>
+                <td>{{$course["bm2_hours"]}} </td>
+            </tr>
+            @endforeach
     </tbody>
 </table>
 @endif
