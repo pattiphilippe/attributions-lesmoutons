@@ -13,7 +13,10 @@
 <div class="alert alert-danger csv-messages">{{ session('error') }}</div>
 @endif
 <h1>Liste de groupes</h1>
-
+@if (count($groupes) == 0)
+<h2>La liste est vide</h2>
+<p>Pas de groupe disponible. </p>
+@else
 <table id="table-groups-list" class="table">
     <thead>
         <tr>

@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Groupe;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -11,12 +12,6 @@ class ListeGroupsTest extends DuskTestCase
 
     use DatabaseMigrations;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->artisan('db:seed');
-    }
-
     /**
      * testContainsSeederInfo
      *
@@ -24,8 +19,9 @@ class ListeGroupsTest extends DuskTestCase
      */
     public function testTitle()
     {
-        $user = factory(\App\User::class)->create();
 
+        $user = factory(\App\User::class)->create();
+        factory(Groupe::class, 100)->create();
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/groupes')
@@ -41,13 +37,30 @@ class ListeGroupsTest extends DuskTestCase
     public function testGroupsReturnAccueil()
     {
         $user = factory(\App\User::class)->create();
-
+        factory(Groupe::class, 100)->create();
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/groupes')
                 ->assertSee('Liste de groupes')
                 ->press('#accueilBtn')
                 ->assertRouteIs('home');
+        });
+    }
+
+    
+     /**
+     * A Dusk test example.
+     *
+     * @return void
+     */
+    public function testWithoutGroupes()
+    {
+        $user = factory(\App\User::class)->create();
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/groupes')
+                ->assertTitle('Liste de groupes')
+                ->assertSee('La liste est vide');
         });
     }
 
