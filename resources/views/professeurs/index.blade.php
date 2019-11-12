@@ -53,11 +53,4 @@
         accueil </button>
     {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
 </div>
-
-<script>
-    $("#import-csv").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-</script>
 @endsection

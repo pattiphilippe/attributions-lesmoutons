@@ -26,4 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/courses', 'CourseController@index');
 
     Route::post('/uploadFileProfessor', 'ProfesseurController@uploadFileProfessor')->name('upload_professor');
+    Route::post('/uploadFileGroup', 'GroupController@uploadFileGroup')->name('upload_group');
+    Route::post('/uploadFileCourse', 'CourseController@uploadFileCourse')->name('upload_course');
+
 });
