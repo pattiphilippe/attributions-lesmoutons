@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Attribution;
+use App\Course;
+use App\Groupe;
+use App\Professeur;
 use Illuminate\Http\Request;
 
 class AttributionsController extends Controller
@@ -25,7 +29,11 @@ class AttributionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('attributions.create', [
+            'professors' => Professeur::all(),
+            'courses' => Course::all(),
+            'groupes' => Groupe::all(),
+        ]);
     }
 
     /**
@@ -36,7 +44,22 @@ class AttributionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'professor' => 'required|min:3|max:3',
+            'course' => 'required',
+            'group' => 'required',
+        ]);
+
+        $course_id = Course::where('title', $request->course)->firstOrFail()->id;
+
+        Attribution::create([
+            'professor_acronyme' => $validatedData['professor'],
+            'course_id' => $course_id,
+            'group_id' => $validatedData['group'],
+            'quadrimester' => 2,
+        ]);
+
+        return redirect()->route('attributions.index');
     }
 
     /**

@@ -27,33 +27,21 @@
     <tbody>
         @foreach ($attributions as $attribution)
         <tr>
-            <td scope="row">{{$attribution["professeur_acronyme"]}} </td>
+            <td scope="row">{{$attribution["professor_acronyme"]}} </td>
             <td>{{$attribution["course_id"]}} </td>
             <td>{{$attribution["group_id"]}} </td>
-            <td>{{$attribution["quadrimestre"]}} </td>
+            <td>{{$attribution["quadrimester"]}} </td>
         </tr>
         @endforeach
     </tbody>
 </table>
 
-<!-- Form -->
-<form method='post' action='{{ route('upload_professor') }}' enctype='multipart/form-data'>
-    @csrf
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <input class="btn btn-info" type='submit' name='submit' value='Import' id='import-csv-button'> </div>
-        <div class="custom-file">
-            <input type="file" name="file" class="custom-file-input" id="import-csv">
-            <label class="custom-file-label" for="import-csv">Choose csv file</label>
-        </div>
-    </div>
-</form>
-
+<a id="create-attribution-button" class="btn btn-info" href="{{ route('attributions.create') }}" role="button">Ajouter attribution</a>
 
 <div class="buttonBloc">
     <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
         accueil </button>
-    {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
+    {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
 <script>
