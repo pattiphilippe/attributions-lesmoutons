@@ -42,13 +42,12 @@ class ListeGroupsTest extends DuskTestCase
             $browser->loginAs($user)
                 ->visit('/groupes')
                 ->assertSee('Liste de groupes')
-                ->press('#accueilBtn')
+                ->click('#accueilBtn')
                 ->assertRouteIs('home');
         });
     }
 
-    
-     /**
+    /**
      * A Dusk test example.
      *
      * @return void

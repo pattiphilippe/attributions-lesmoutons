@@ -31,6 +31,7 @@
         @endforeach
     </tbody>
 </table>
+@endif
 
 <!-- Form -->
 <form method='post' action='{{ route('upload_group') }}' enctype='multipart/form-data'>

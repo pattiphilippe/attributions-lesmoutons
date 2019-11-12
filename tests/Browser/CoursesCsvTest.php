@@ -62,7 +62,6 @@ class CoursesCsvTest extends DuskTestCase
         $filePath = 'uploads/random_courses.csv';
         file_put_contents($filePath, "id,title,credits,BM1_hours,BM2_hours\nDEV2,devel,10,10,10");
 
-
         $user = factory(\App\User::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $filePath) {
