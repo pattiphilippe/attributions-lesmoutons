@@ -14,7 +14,7 @@ class CreateAttributionsTable extends Migration
     public function up()
     {
         Schema::create('attributions', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->bigIncrements('id');
             $table->string('professor_acronyme', 3);
             $table->string('course_id', 5);
             $table->string('group_id', 5);

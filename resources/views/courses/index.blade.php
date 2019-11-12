@@ -4,6 +4,11 @@
 
 @section('content')
 <h1>Liste des Cours</h1>
+<select name="option">
+    <option value="all">tout</option>
+    <option value="attributed">attribué(s)</option>
+    <option value="nonAttributed">non-attribué(s)</option>
+</select>
 @if(count($courses) == 0)
 <h2>La liste est un peu vide!</h2>
 <p>Pas de cours disponible 😀</p>
