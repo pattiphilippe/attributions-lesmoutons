@@ -26,7 +26,7 @@ class GroupCSVTest extends DuskTestCase
     public function test_import_csv_group_file_wrong_content()
     {
         $filePath = 'uploads/random_group.csv';
-        file_put_contents($filePath, "acronyme,nm,rrerere\ny§rrurutur");
+        file_put_contents($filePath, "acronyme,nm,rrerere\ny§rrumgktrkmgkmtrmkgrtkmmgkrtmkmgkrtmkmgkrtmkgmktrmkgmktrmkgmrktgmkrtmkhmkyrmkhrmkrmkhmkhrrutur");
 
         $user = factory(\App\User::class)->create();
 
