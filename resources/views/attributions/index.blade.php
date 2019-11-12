@@ -14,7 +14,10 @@
 @endif
 
 <h1>Liste des attributions</h1>
-
+@if(count($attributions) == 0)
+<h2>La liste est vide</h2>
+<p>Pas d'attributions 😀</p>
+@else
 <table id="table-professors-list" class="table">
     <thead>
         <tr>
@@ -27,14 +30,15 @@
     <tbody>
         @foreach ($attributions as $attribution)
         <tr>
-            <td scope="row">{{$attribution["professeur_acronyme"]}} </td>
+            <td scope="row">{{$attribution["professor_acronyme"]}} </td>
             <td>{{$attribution["course_id"]}} </td>
             <td>{{$attribution["group_id"]}} </td>
-            <td>{{$attribution["quadrimestre"]}} </td>
+            <td>{{$attribution["quadrimester"]}} </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+@endif
 
 <!-- Form -->
 <form method='post' action='{{ route('upload_professor') }}' enctype='multipart/form-data'>

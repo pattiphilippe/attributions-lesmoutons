@@ -47,5 +47,23 @@ class AttributionListTest extends DuskTestCase
                 ->assertSee('La liste est vide');
         });
     }
+
+      /**
+     * testGroupsReturnAccueil
+     *
+     * @return void
+     */
+    public function testAttributionsReturnAccueil()
+    {
+        $user = factory(\App\User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/attributions')
+                ->assertSee('Liste des attributions')
+                ->press('#accueilBtn')
+                ->assertRouteIs('home');
+        });
+    }
 }
 

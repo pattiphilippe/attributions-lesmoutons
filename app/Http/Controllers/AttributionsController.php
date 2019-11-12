@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AttributionsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource
      *
      * @return \Illuminate\Http\Response
      */
