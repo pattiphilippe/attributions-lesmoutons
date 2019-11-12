@@ -39,8 +39,6 @@
     </tbody>
 </table>
 @endif
-<<<<<<< HEAD
-=======
 <!-- Form -->
 <form method='post' action='{{ route('upload_professor') }}' enctype='multipart/form-data'>
     @csrf
@@ -54,7 +52,6 @@
     </div>
 </form>
 
->>>>>>> attributions
 
 <div class="buttonBloc">
     <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
