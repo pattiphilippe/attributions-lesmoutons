@@ -14,4 +14,20 @@ class Attribution extends Model
 
     public $incrementing = false;
     public $timestamps = false;
+
+
+    public function professeur() 
+    {
+        return $this->belongsTo('App\Professeur');
+    }
+
+    public function course() 
+    {
+        return $this->belongsTo('App\Course');
+    }
+
+    public function groupe() 
+    {
+        return $this->belongsTo('App\Groupe');
+    }
 }
