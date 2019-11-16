@@ -6,15 +6,17 @@
 
 @section('content')
 <h1>Liste des Cours</h1>
-<select name="submit">
-    <option value="courses">Tout</option>
-    <option value="coursesAttribute">Attribué(s)</option>
-    <option value="CoursesNotAttributed">Non-attribué(s)</option>
-</select>
 @if(count($courses) == 0)
 <h2>La liste est un peu vide!</h2>
 <p>Pas de cours disponible 😀</p>
 @else
+<form id="form" action="/courses" method="GET">
+    <select name="option" onchange="showCourses()">
+        <option value="courses" <?php echo (isset($_GET['option']) && $_GET['option'] == 'courses') ? 'selected="selected"' : ''; ?> >Tout</option>
+        <option value="coursesAttributed" <?php echo (isset($_GET['option']) && $_GET['option'] == 'coursesAttributed') ? 'selected="selected"' : ''; ?> >Attribué(s)</option>
+        <option value="coursesNonAttributed" <?php echo (isset($_GET['option']) && $_GET['option'] == 'coursesNonAttributed') ? 'selected="selected"' : ''; ?> >Non-attribué(s)</option>
+    </select>
+</form>
 <table id="table-professeurs-list" class="table">
     <thead>
         <tr>
@@ -28,15 +30,20 @@
     <tbody>
             @foreach ($courses as $course)
             <tr>
-                <td scope="row">{{$course["id"]}} </td>
-                <td>{{$course["title"]}} </td>
-                <td>{{$course["credits"]}} </td>
-                <td>{{$course["bm1_hours"]}} </td>
-                <td>{{$course["bm2_hours"]}} </td>
+                <td scope="row">{{$course->id}} </td>
+                <td>{{$course->title}} </td>
+                <td>{{$course->credits}} </td>
+                <td>{{$course->bm1_hours}} </td>
+                <td>{{$course->bm2_hours}} </td>
             </tr>
             @endforeach
     </tbody>
 </table>
+<script>
+    function showCourses() {
+        $("#form").submit();
+    }
+</script>
 @endif
 <div class="buttonBloc">
     <button type="button" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>

@@ -21,7 +21,7 @@
     <header>
         <img id="logo" src="{{ asset('images/he2b-esi.jpg') }}" alt="HE2B-ESI" />
 
-        <h1>PRJG5 - HEB ESI </h1>
+        <h1>PRJG5 - HE2B ESI </h1>
     </header>
 
     <main class="container">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Course;
-use App\Attribution;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -15,20 +14,35 @@ class CourseController extends Controller
      */
     public function index()
     {
+        if(isset($_GET['option'])) {
+            $select = $_GET['option'];
+            if($select == 'coursesAttributed') {
+                return view('courses.index', [
+                    'courses' => $this->getAttributedCourses(),
+                ]);
+            }else if($select == 'coursesNonAttributed') {
+                return view('courses.index', [
+                    'courses' => $this->getNonAttributedCourses(),
+                ]);
+            }else {
+                return view('courses.index', [
+                    'courses' => Course::all(),
+                ]);
+            }
+        }
         return view('courses.index', [
             'courses' => Course::all(),
         ]);
     }
 
-    public function getAttributedCourses()
-    {
-        $attributed = DB::select('SELECT * FROM courses join attributions on courses.id = attributions.course_id');
-        return $attributed;
+    public function getAttributedCourses() {
+        return DB::select('SELECT courses.id, courses.title, courses.credits, courses.bm1_hours, courses.bm2_hours
+        FROM courses JOIN attributions ON courses.id = attributions.course_id');
     }
-    public function getNoAttributedCourses()
-    {
-        $Notattributed = DB::select('SELECT * FROM courses Left join attributions on courses.id = attributions.course_id');
-        return $Notattributed;
+
+    public function getNonAttributedCourses() {
+        return DB::select('SELECT courses.id, courses.title, courses.credits, courses.bm1_hours, courses.bm2_hours
+        FROM courses LEFT JOIN attributions ON courses.id = attributions.course_id WHERE attributions.course_id is NULL');
     }
 
     /**

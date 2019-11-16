@@ -173,3 +173,7 @@ a.action {
 .csv-messages {
     margin-top: 30px;
 }
+
+#form {
+    height: 15%;
+}
