@@ -2,18 +2,12 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Course;
-use database\Factory\CourseFactory;
-use App\Groupe;
-use database\Factory\GroupeFactory;
-use App\Professeur;
-use database\Factory\ProfesseurFactory;
 use App\Attribution;
-use database\Factory\AttributionRawFactory;
-
+use App\Course;
+use App\Groupe;
+use App\Professeur;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AttributionTest extends TestCase
 {
@@ -59,8 +53,8 @@ class AttributionTest extends TestCase
         $this->expectException(\PDOException::class);
         factory(Attribution::class)->create(
             ['groupe_id' => $inserted->groupe_id,
-            'course_id' => $inserted->course_id,
-            'quadrimester' => $inserted->quadrimester
+                'course_id' => $inserted->course_id,
+                'quadrimester' => $inserted->quadrimester,
             ]
         );
     }
@@ -94,7 +88,7 @@ class AttributionTest extends TestCase
         $this->initTables();
         $inserted = factory(Attribution::class)->states('randomForeignKeys')->create();
         Attribution::destroy($inserted->id);
-        $this->assertDatabaseMissing('attributions', ['id'=> $inserted->id]);
+        $this->assertDatabaseMissing('attributions', ['id' => $inserted->id]);
     }
 
     public function testUpdateAttributionViolatesProfessorFK()

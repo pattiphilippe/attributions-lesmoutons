@@ -40,10 +40,13 @@
 </table>
 @endif
 
+<a id="create-attribution-button" class="btn btn-info" href="{{ route('attributions.create') }}" role="button">Ajouter
+    attribution</a>
+
 <div class="buttonBloc">
     <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
         accueil </button>
-    {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
+    {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
 <script>

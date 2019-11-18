@@ -24,7 +24,8 @@ class CreateAttributionsTable extends Migration
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('group_id')->references('nom')->on('groupes');
 
-            $table->unique(['course_id', 'group_id', 'quadrimester']);
+            $table->unique(['professor_acronyme', 'course_id', 'group_id']);
+            $table->unique(['course_id', 'group_id']);
         });
     }
 

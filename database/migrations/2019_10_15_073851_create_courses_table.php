@@ -15,10 +15,10 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->string('id', 5)->primary();
-            $table->string('title',100)->unique();
+            $table->string('title', 100)->unique();
             $table->integer('credits'); //TODO : max = 30.
-            $table->integer('bm1_hours');//todo
-            $table->integer('bm2_hours');//todo
+            $table->integer('bm1_hours'); //todo
+            $table->integer('bm2_hours'); //todo
         });
     }
 

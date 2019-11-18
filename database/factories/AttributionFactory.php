@@ -4,13 +4,12 @@
 
 use App\Attribution;
 use App\Course;
-use App\Professeur;
 use App\Groupe;
+use App\Professeur;
 use Faker\Generator as Faker;
 
 $factory->define(Attribution::class, function (Faker $faker) {
     return [
-        'id' => $faker->numerify('#####'),
         'professor_acronyme' => factory(App\Professeur::class),
         'course_id' => factory(App\Course::class),
         'group_id' => factory(App\Groupe::class),
@@ -32,5 +31,3 @@ $factory->state(Attribution::class, 'randomForeignKeys', function (Faker $faker)
         'quadrimester' => $faker->numberBetween($min = 1, $max = 6),
     ];
 });
-
-

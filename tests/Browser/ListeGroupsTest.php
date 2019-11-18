@@ -43,7 +43,7 @@ class ListeGroupsTest extends DuskTestCase
                 ->visit('/groupes')
                 ->assertSee('Liste de groupes')
                 ->click('#accueilBtn')
-                ->assertRouteIs('home');
+                ->waitForLocation('/home');
         });
     }
 
