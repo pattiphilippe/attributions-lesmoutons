@@ -68,4 +68,40 @@ class CourseTest extends TestCase
         $course2 = factory(Course::class)->create(['title' => 'Abigail',]);
     }
 
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    //public function testAddCourseWithNotEnoughCredits()
+    //{
+     //   $this->expectException(\PDOException::class);
+     //   $course2 = factory(Course::class)->create(['credits' => 0]);
+    //}
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    //public function testAddCourseWithTooManyCredits()
+    //{
+    //    $this->expectException(\PDOException::class);
+    //    $course2 = factory(Course::class)->create(['credits' => 60]);
+    //}
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    //public function testAddCourseWithTooManyHours()
+    //{
+    //    $this->expectException(\PDOException::class);
+    //    $course2 = factory(Course::class)->create(['bm1_hours' => 500]);
+    //}
+
+    /**
+     * Expects a PDOException on constraint violation.
+     */
+    //public function testAddCourseWithNotEnoughHours()
+    //{
+    //    $this->expectException(\PDOException::class);
+    //    $course2 = factory(Course::class)->create(['bm2_hours' => -100]);
+    //}
+
 }

@@ -52,6 +52,20 @@
                         </div>
                     </a>
 
+                    <a class="action border rounded" href="/attributions">
+                        <div class="action-logo">
+                            <img src="{{ asset('images/attribution.png') }}" alt="attributions-logo" width="64" height="64">
+                        </div>
+                        <div class="action-body-container">
+                            <div class="action-title">
+                                Attributions
+                            </div>
+                            <div class="action-description">
+                                Liste des attributions.
+                            </div>
+                        </div>
+                    </a>
+
                     <a class="action border rounded" href="/courses">
                         <div class="action-logo">
                             <img src="{{ asset('images/courses.png') }}" alt="courses-logo" width="64" height="64">

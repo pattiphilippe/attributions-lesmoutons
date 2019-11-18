@@ -14,7 +14,17 @@ class Attribution extends Model
 
     function course()
     {
-        return $this->hasOne('App\Course');
+        return $this->belongsTo('App\Course');
+    }
+
+    public function professeur() 
+    {
+        return $this->belongsTo('App\Professeur');
+    }
+
+    public function groupe() 
+    {
+        return $this->belongsTo('App\Groupe');
     }
 
 }
