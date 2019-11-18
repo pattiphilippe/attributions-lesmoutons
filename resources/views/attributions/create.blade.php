@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group">
-        <label for="group-select">Choisissez le group</label>
+        <label for="group-select">Choisissez le groupe</label>
         <select class="form-control" name="group" id="group-select">
             @foreach ($groupes as $group)
             <option value="{{ $group->nom }}">{{ $group->nom }}</option>
