@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Professeur;
+use App\Commit;
 use Illuminate\Http\Request;
 use \PDO;
 
@@ -20,7 +20,7 @@ class CommitController extends Controller
 
     public function index()
     {
-        $commits = $this->getCommits(\DB::connection()->getPdo());
+        $commits = \DB::table('commits')->orderBy('created_at', 'desc')->get();
         return view('commits.index', [
             'commits' => $commits
         ]);

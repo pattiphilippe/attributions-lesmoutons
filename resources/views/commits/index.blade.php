@@ -11,16 +11,14 @@
             <th>Identifiant</th>
             <th>Message</th>
             <th>Auteur</th>
-            <th>Date</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($commits as $commit)
         <tr>
-            <td>{{$commit["id"]}} </td>
-            <td>{{$commit["message"]}} </td>
-            <td>{{$commit["author"]}} </td>
-            <td>{{$commit["insertion"]}} </td>
+            <td>{{$commit->id}} </td>
+            <td>{{$commit->message}} </td>
+            <td>{{$commit->author}} </td>
         </tr>
         @endforeach
     </tbody>
