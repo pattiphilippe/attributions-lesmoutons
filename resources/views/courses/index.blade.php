@@ -34,8 +34,8 @@
             <td scope="row">{{$course["id"]}} </td>
             <td>{{$course["title"]}} </td>
             <td>{{$course["credits"]}} </td>
-            <td>{{$course["BM1_hours"]}} </td>
-            <td>{{$course["BM2_hours"]}} </td>
+            <td>{{$course["bm1_hours"]}} </td>
+            <td>{{$course["bm2_hours"]}} </td>
         </tr>
         @endforeach
     </tbody>

@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/commits', 'CommitController@index')->name('commits');
     Route::get('/courses', 'CourseController@index');
+    Route::get('/attributions', 'AttributionsController@index');
 
     Route::post('/uploadFileProfessor', 'ProfesseurController@uploadFileProfessor')->name('upload_professor');
     Route::post('/uploadFileGroup', 'GroupController@uploadFileGroup')->name('upload_group');
