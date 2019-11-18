@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Groupe::class, function (Faker $faker) {
     return [
-        'nom'=> $faker->unique()->name
+        'nom' => $faker->unique()->asciify('****'),
     ];
 });

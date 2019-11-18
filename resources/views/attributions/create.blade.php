@@ -21,7 +21,8 @@
         <label for="professor-select">Choisissez le professeur</label>
         <select class="form-control" name="professor" id="professor-select">
             @foreach ($professors as $professor)
-                <option value="{{ $professor->acronyme }}">{{ $professor->acronyme }}</option>
+
+            <option value="{{ $professor->acronyme }}">{{ $professor->acronyme }}</option>
             @endforeach
         </select>
     </div>
@@ -30,7 +31,7 @@
         <label for="group-select">Choisissez le group</label>
         <select class="form-control" name="group" id="group-select">
             @foreach ($groupes as $group)
-                <option value="{{ $group->nom }}">{{ $group->nom }}</option>
+            <option value="{{ $group->nom }}">{{ $group->nom }}</option>
             @endforeach
         </select>
     </div>
@@ -39,12 +40,12 @@
         <label for="course-select">Choisissez le cours</label>
         <select class="form-control" name="course" id="course-select">
             @foreach ($courses as $course)
-                <option value="{{ $course->title }}">{{ $course->title }}</option>
+            <option value="{{ $course->id }}">{{ $course->title }}</option>
             @endforeach
         </select>
     </div>
 
-    <button type="submit" class="btn btn-info">Valider</button>
+    <button id="submit-add-attribution" type="submit" class="btn btn-info">Valider</button>
 </form>
 
 
