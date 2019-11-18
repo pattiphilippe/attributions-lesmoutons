@@ -11,13 +11,6 @@ use \PDO;
 class CommitController extends Controller
 {
 
-    public static function getCommits($connection) {
-        $statement = $connection->query(
-            'SELECT id, message, author, insertion FROM commits ORDER BY insertion DESC'
-        );
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public function index()
     {
         $commits = \DB::table('commits')->orderBy('created_at', 'desc')->get();
