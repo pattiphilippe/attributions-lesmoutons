@@ -12,7 +12,6 @@ class ProfesseursTest extends DuskTestCase
 
     use DatabaseMigrations;
 
-
     /**
      * A basic browser test example.
      *
@@ -43,7 +42,7 @@ class ProfesseursTest extends DuskTestCase
                 ->visit('/professeurs')
                 ->assertSee('Liste de professeurs')
                 ->press('#accueilBtn')
-                ->assertRouteIs('home');
+                ->waitForLocation('/home');
         });
     }
 
@@ -63,7 +62,7 @@ class ProfesseursTest extends DuskTestCase
         });
     }
 
-      /**
+    /**
      * A Dusk test example.
      *
      * @return void
