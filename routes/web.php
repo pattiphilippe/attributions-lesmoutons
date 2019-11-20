@@ -30,4 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/uploadFileGroup', 'GroupController@uploadFileGroup')->name('upload_group');
     Route::post('/uploadFileCourse', 'CourseController@uploadFileCourse')->name('upload_course');
 
+    Route::post('/downloadFileAttribution','AttributionController@downloadFileAttribution')->name('download_attribution');
+
 });

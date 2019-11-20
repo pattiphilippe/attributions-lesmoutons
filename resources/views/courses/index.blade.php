@@ -18,7 +18,7 @@
 <h2>La liste est un peu vide!</h2>
 <p>Pas de cours disponible 😀</p>
 @else
-<table id="table-professeurs-list" class="table">
+<table id="table-courses-list" class="table">
     <thead>
         <tr>
             <th>Acronyme</th>
