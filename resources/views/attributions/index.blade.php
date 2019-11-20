@@ -18,6 +18,14 @@
 <h2>La liste est vide</h2>
 <p>Pas d'attributions 😀</p>
 @else
+<div class="form-group">
+  <label for="select-groupby">Grouper par</label>
+  <select id="select-groupby">
+      <option value="" selected disabled>Choose here</option>
+      <option value="group">Groupe</option>
+      <option value="course">Activité d'apprentissage</option>
+  </select>
+</div>
 <table id="table-professors-list" class="table">
     <thead>
         <tr>
@@ -49,14 +57,73 @@
     {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
-<<<<<<< HEAD
-@endsection
-=======
 <script>
     $("#import-csv").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    $(() => {
+        initSelectListener();
+        // fetchAttributions();
+    });
+
+    function initSelectListener() {
+        $("#select-groupby").on('change', function() {
+            if(this.value == "group") {
+                fetchAttributions();
+            }
+        });
+    }
+
+    function fillTable(data) {
+        console.log(data);
+        // groupBy(data, attribution => attribution.group_id);
+        emptyTable();
+
+        for (const [key, value] of data.entries()) {
+            // console.log(key, value);
+
+            value.forEach(attribution => {
+                console.log(attribution);
+                addRow(attribution);
+            });
+        }
+    }
+
+    function addRow(data) {
+        $("#table-professors-list tbody").append(`
+        <tr>
+            <td>${data.professor_acronyme}</td>
+            <td scope="row">${data.course_id}</td>
+            <td>${data.group_id}</td>
+            <td>${data.quadrimester}</td>
+        </tr>`);
+    }
+
+    function emptyTable() {
+        $("#table-professors-list tbody").empty();
+    }
+
+    function fetchAttributions() {
+        $.get("/api/attributions", (data, status) => {
+            // console.log(groupBy(data, attribution => attribution.group_id));
+            fillTable(groupBy(data, attribution => attribution.group_id));
+        });
+    }
+
+    function groupBy(list, keyGetter) {
+        const map = new Map();
+        list.forEach((item) => {
+            const key = keyGetter(item);
+            const collection = map.get(key);
+            if (!collection) {
+                map.set(key, [item]);
+            } else {
+                collection.push(item);
+            }
+        });
+        return map;
+    }
 </script>
 @endsection
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
