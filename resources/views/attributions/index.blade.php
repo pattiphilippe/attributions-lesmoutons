@@ -40,10 +40,23 @@
 </table>
 @endif
 
+<a id="create-attribution-button" class="btn btn-info" href="{{ route('attributions.create') }}" role="button">Ajouter
+    attribution</a>
+
 <div class="buttonBloc">
     <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
         accueil </button>
-    {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
+    {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
+<<<<<<< HEAD
 @endsection
+=======
+<script>
+    $("#import-csv").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+@endsection
+>>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a

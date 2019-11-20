@@ -13,6 +13,7 @@
 
     {{-- JQUERY --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/theme.css') }}" />
 </head>
@@ -25,6 +26,15 @@
     </header>
 
     <main class="container">
+        @if ($errors->any())
+        <div class="alert alert-danger display-errors">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         @yield('content')
     </main>
 

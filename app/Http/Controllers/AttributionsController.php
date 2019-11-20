@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Attribution;
+use App\Course;
+use App\Groupe;
+use App\Professeur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AttributionsController extends Controller
 {
@@ -25,7 +31,11 @@ class AttributionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('attributions.create', [
+            'professors' => Professeur::all(),
+            'courses' => Course::all(),
+            'groupes' => Groupe::all(),
+        ]);
     }
 
     /**
@@ -36,7 +46,20 @@ class AttributionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = Validator::make(
+            $request->all(),
+            $this->rules($request),
+            $this->errorMessages())
+            ->validate();
+
+        Attribution::create([
+            'professor_acronyme' => $validatedData['professor'],
+            'course_id' => $validatedData['course'],
+            'group_id' => $validatedData['group'],
+            'quadrimester' => 2, //TODO change this value, it's only here for debugging before schema change
+        ]);
+
+        return redirect()->route('attributions.index');
     }
 
     /**
@@ -82,5 +105,40 @@ class AttributionsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function rules(Request $request)
+    {
+        return [
+            'professor' => [
+                'required', 'size:3', 'exists:professeurs,acronyme',
+                Rule::unique('attributions', 'professor_acronyme')->where(function ($query) use ($request) {
+                    return $query->where('professor_acronyme', $request->professor)
+                        ->where('course_id', $request->course)
+                        ->where('group_id', $request->group);
+                })],
+            'course' => [
+                'required', 'exists:courses,id',
+                Rule::unique('attributions', 'course_id')->where(function ($query) use ($request) {
+                    return $query->where('professor_acronyme', '!=', $request->professor)
+                        ->where('course_id', $request->course)
+                        ->where('group_id', $request->group);
+                })],
+            'group' => ['required', 'exists:groupes,nom'],
+        ];
+    }
+
+    public static function errorMessages()
+    {
+        return [
+            'required' => 'Le champ :attribute est obligatoire.',
+            'professor.exists' => 'Le professeur :input n\'existe pas !',
+            'professor.unique' => 'Le professeur :input donne déjà ce cours à ce groupe.',
+            'course.unique' => 'Un professeur est déjà attribué à ce cours et ce groupe.',
+            'course.exists' => 'Le cours :input n\'existe pas !',
+            'group.exists' => 'Le groupe :input n\'existe pas !',
+            'size' => 'Le champ :attribute doit être de taille :size.',
+            'between' => 'Le valeur :input du champ :attribute n\'est pas de longueur :min - :max.',
+        ];
     }
 }

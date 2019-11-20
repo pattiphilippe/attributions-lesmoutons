@@ -28,7 +28,6 @@
             </label>
         </div> --}}
         <button id="login-button" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a id="register-button" class="btn btn-lg btn-info btn-block" href="/register" role="button">Register</a>
         <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
     </form>
 @endsection

@@ -54,7 +54,8 @@
 
                     <a class="action border rounded" href="/attributions">
                         <div class="action-logo">
-                            <img src="{{ asset('images/attribution.png') }}" alt="attributions-logo" width="64" height="64">
+                            <img src="{{ asset('images/attribution.png') }}" alt="attributions-logo" width="64"
+                                height="64">
                         </div>
                         <div class="action-body-container">
                             <div class="action-title">

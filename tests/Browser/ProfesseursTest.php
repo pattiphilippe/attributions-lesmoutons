@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Professeur;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -11,13 +12,6 @@ class ProfesseursTest extends DuskTestCase
 
     use DatabaseMigrations;
 
-    public function setUp(): void
-    {
-
-        parent::setUp();
-        $this->artisan('db:seed');
-    }
-
     /**
      * A basic browser test example.
      *
@@ -26,7 +20,7 @@ class ProfesseursTest extends DuskTestCase
     public function testProfesseursPage()
     {
         $user = factory(\App\User::class)->create();
-
+        factory(Professeur::class, 100)->create();
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/professeurs')
@@ -42,13 +36,13 @@ class ProfesseursTest extends DuskTestCase
     public function testProfesseursReturnAccueil()
     {
         $user = factory(\App\User::class)->create();
-
+        factory(Professeur::class, 100)->create();
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/professeurs')
                 ->assertSee('Liste de professeurs')
                 ->press('#accueilBtn')
-                ->assertRouteIs('home');
+                ->waitForLocation('/home');
         });
     }
 
@@ -60,7 +54,7 @@ class ProfesseursTest extends DuskTestCase
     public function testProfesseursContainsSeederInfo()
     {
         $user = factory(\App\User::class)->create();
-
+        factory(Professeur::class, 100)->create();
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/professeurs')
@@ -68,4 +62,19 @@ class ProfesseursTest extends DuskTestCase
         });
     }
 
+    /**
+     * A Dusk test example.
+     *
+     * @return void
+     */
+    public function testWithoutProfesseurs()
+    {
+        $user = factory(\App\User::class)->create();
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/professeurs')
+                ->assertTitle('Liste de professeurs')
+                ->assertSee('La liste est vide');
+        });
+    }
 }

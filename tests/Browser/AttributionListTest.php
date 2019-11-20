@@ -2,11 +2,10 @@
 
 namespace Tests\Browser;
 
+use App\Attribution;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-
-use App\Attribution;
 
 class AttributionListTest extends DuskTestCase
 {
@@ -48,7 +47,7 @@ class AttributionListTest extends DuskTestCase
         });
     }
 
-      /**
+    /**
      * testGroupsReturnAccueil
      *
      * @return void
@@ -62,8 +61,7 @@ class AttributionListTest extends DuskTestCase
                 ->visit('/attributions')
                 ->assertSee('Liste des attributions')
                 ->press('#accueilBtn')
-                ->assertRouteIs('home');
+                ->waitForLocation('/home');
         });
     }
 }
-

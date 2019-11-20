@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Course;
 use Illuminate\Http\Request;
+use App\Utilitaries\Util;
+
 
 class CourseController extends Controller
 {
@@ -109,5 +111,14 @@ class CourseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadFileCourse(Request $request)
+    {
+        Util::handleCSVInsertion($request, [
+            "id", "title", "credits","BM1_hours","BM2_hours",
+        ], Course::class);
+
+        return redirect('courses');
     }
 }

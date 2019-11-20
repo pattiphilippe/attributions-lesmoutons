@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupesTable extends Migration
+class CreateCommitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateGroupesTable extends Migration
      */
     public function up()
     {
-        Schema::create('groupes', function (Blueprint $table) {
-            $table->string('nom', 50)->primary();
+        Schema::create('commits', function (Blueprint $table) {
+            $table->string('id', 255)->primary();
+            $table->string('message', 255);
+            $table->string('author', 255);
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ class CreateGroupesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groupes');
+        Schema::dropIfExists('commits');
     }
 }
