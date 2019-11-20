@@ -49,14 +49,4 @@
     {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
-<<<<<<< HEAD
 @endsection
-=======
-<script>
-    $("#import-csv").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-</script>
-@endsection
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
