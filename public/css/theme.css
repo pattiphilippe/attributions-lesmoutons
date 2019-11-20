@@ -174,15 +174,14 @@ a.action {
     margin-top: 30px;
 }
 
-<<<<<<< HEAD
 #form {
     height: 15%;
-=======
-.buttonBloc {
+}
+
+.buttonBloc{
     margin-top: 20px;
 }
 
-.display-errors {
+.display-errors{
     margin-top: 30px;
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
 }

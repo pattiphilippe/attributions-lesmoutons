@@ -68,6 +68,12 @@
     </div>
 </form>
 <div class="buttonBloc">
-    <button type="button" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>
+    <button type="button" id="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>
 </div>
+<script>
+    $("#import-csv").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 @endsection

@@ -13,15 +13,9 @@
 <div class="alert alert-danger csv-messages">{{ session('error') }}</div>
 @endif
 <h1>Liste de groupes</h1>
-<<<<<<< HEAD
 @if(count($groupes) == 0)
-<h2>La liste est un peu vide!</h2>
-<p>Pas de groupes disponible 😀</p>
-=======
-@if (count($groupes) == 0)
 <h2>La liste est vide</h2>
-<p>Pas de groupe disponible. </p>
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
+<p>Pas de groupes disponible 😀</p>
 @else
 <table id="table-groups-list" class="table">
     <thead>
@@ -38,8 +32,6 @@
     </tbody>
 </table>
 @endif
-<<<<<<< HEAD
-=======
 
 <!-- Form -->
 <form method='post' action='{{ route('upload_group') }}' enctype='multipart/form-data'>
@@ -54,10 +46,13 @@
     </div>
 </form>
 
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
 <div class="buttonBloc">
-    <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
-        accueil </button>
-    {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
+    <button type="button" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>
 </div>
+<script>
+    $("#import-csv").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 @endsection

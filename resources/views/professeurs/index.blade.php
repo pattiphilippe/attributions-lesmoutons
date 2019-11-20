@@ -14,15 +14,9 @@
 @endif
 
 <h1>Liste de professeurs</h1>
-<<<<<<< HEAD
 @if(count($professeurs) == 0)
-<h2>La liste est un peu vide!</h2>
-<p>Pas de professeurs disponible 😀</p>
-=======
-@if (count($professeurs) == 0)
 <h2>La liste est vide</h2>
-<p>Pas de professeur disponible. </p>
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
+<p>Pas de professeurs disponible 😀</p>
 @else
 <table id="table-professors-list" class="table">
     <thead>
@@ -43,10 +37,6 @@
     </tbody>
 </table>
 @endif
-<<<<<<< HEAD
-=======
-
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
 <!-- Form -->
 <form method='post' action='{{ route('upload_professor') }}' enctype='multipart/form-data'>
     @csrf
@@ -66,7 +56,6 @@
         accueil </button>
     {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
 </div>
-<<<<<<< HEAD
 
 <script>
     $("#import-csv").on("change", function() {
@@ -74,6 +63,4 @@
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 </script>
-=======
->>>>>>> 552366a16cc9501eebe212dd1f221fcd54554f5a
 @endsection
