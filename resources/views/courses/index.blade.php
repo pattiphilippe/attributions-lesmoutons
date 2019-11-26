@@ -1,5 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
 @extends('layout')
 
 @section('title', 'Liste des Cours')
@@ -20,12 +18,21 @@
 <h2>La liste est un peu vide!</h2>
 <p>Pas de cours disponible 😀</p>
 @else
-<form id="form" action="/courses" method="GET">
-    <select name="option" onchange="showCourses()">
-        <option value="courses" <?php echo (isset($_GET['option']) && $_GET['option'] == 'courses') ? 'selected="selected"' : ''; ?> >Tout</option>
-        <option value="coursesAttributed" <?php echo (isset($_GET['option']) && $_GET['option'] == 'coursesAttributed') ? 'selected="selected"' : ''; ?> >Attribué(s)</option>
-        <option value="coursesNonAttributed" <?php echo (isset($_GET['option']) && $_GET['option'] == 'coursesNonAttributed') ? 'selected="selected"' : ''; ?> >Non-attribué(s)</option>
-    </select>
+<form id="formFilter" class="col-md-3 input-group" action="/courses" method="GET">
+    <div class="form-group">
+        <label for="filter">Filtre</label>
+        <select class="selectpicker" name="filter" id="filter" onchange="showCourses()">
+            <option value="courses"
+                <?php echo (isset($_GET['filter']) && $_GET['filter'] == 'courses') ? 'selected="selected"' : ''; ?>>
+                Tout</option>
+            <option value="coursesAttributed"
+                <?php echo (isset($_GET['filter']) && $_GET['filter'] == 'coursesAttributed') ? 'selected="selected"' : ''; ?>>
+                Attribué(s)</option>
+            <option value="coursesNonAttributed"
+                <?php echo (isset($_GET['filter']) && $_GET['filter'] == 'coursesNonAttributed') ? 'selected="selected"' : ''; ?>>
+                Non-attribué(s)</option>
+        </select>
+    </div>
 </form>
 <table id="table-professeurs-list" class="table">
     <thead>
@@ -50,9 +57,14 @@
     </tbody>
 </table>
 <script>
-    function showCourses() {
-        $("#form").submit();
+     function showCourses() {
+        $("#formFilter").submit();
     }
+
+    $("#import-csv").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 </script>
 @endif
 <!-- Form -->

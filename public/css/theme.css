@@ -181,3 +181,9 @@ a.action {
 .display-errors {
     margin-top: 30px;
 }
+
+#formFilter {
+    float: right;
+    margin: 15px 15px 0;
+
+}
