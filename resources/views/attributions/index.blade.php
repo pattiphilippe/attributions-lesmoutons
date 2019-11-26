@@ -3,6 +3,7 @@
 @section('title', 'Liste des attributions')
 
 @section('content')
+
 @if(Session::has('warning'))
 <p class="alert alert-danger csv-messages">{{ Session::get('warning') }}</p>
 @endif
@@ -43,8 +44,10 @@
 <a id="create-attribution-button" class="btn btn-info" href="{{ route('attributions.create') }}" role="button">Ajouter
     attribution</a>
 
-<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution') }}" role="button">Export PDF</a>
 
+@if(count($attributions) != 0)
+<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution') }}" role="button">Export PDF</a>
+@endif
 
 <div class="buttonBloc">
     <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
@@ -52,10 +55,12 @@
     {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
+
 <script>
     $("#import-csv").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 </script>
+
 @endsection
