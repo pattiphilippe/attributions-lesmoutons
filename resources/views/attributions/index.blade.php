@@ -26,26 +26,28 @@
       <option value="course">Activité d'apprentissage</option>
   </select>
 </div>
-<table id="table-professors-list" class="table">
-    <thead>
-        <tr>
-            <th>Professeur Acronyme</th>
-            <th>Cours</th>
-            <th>Groupe</th>
-            <th>Quadrimestre</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($attributions as $attribution)
-        <tr>
-            <td scope="row">{{$attribution["professor_acronyme"]}} </td>
-            <td>{{$attribution["course_id"]}} </td>
-            <td>{{$attribution["group_id"]}} </td>
-            <td>{{$attribution["quadrimester"]}} </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+<div id="attributions_list">
+    <table id="table-professors-list" class="table">
+        <thead>
+            <tr>
+                <th>Professeur Acronyme</th>
+                <th>Cours</th>
+                <th>Groupe</th>
+                <th>Quadrimestre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($attributions as $attribution)
+            <tr>
+                <td scope="row">{{$attribution["professor_acronyme"]}} </td>
+                <td>{{$attribution["course_id"]}} </td>
+                <td>{{$attribution["group_id"]}} </td>
+                <td>{{$attribution["quadrimester"]}} </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endif
 
 <a id="create-attribution-button" class="btn btn-info" href="{{ route('attributions.create') }}" role="button">Ajouter
@@ -76,33 +78,49 @@
         });
     }
 
+    function addTitle(title) {
+        $('#attributions_list').append(`<h3>${title}</h3>`);
+    }
+
     function fillTable(data) {
-        console.log(data);
-        // groupBy(data, attribution => attribution.group_id);
-        emptyTable();
-
+        removeTable();
         for (const [key, value] of data.entries()) {
-            // console.log(key, value);
-
-            value.forEach(attribution => {
-                console.log(attribution);
-                addRow(attribution);
-            });
+            addGroupTable(value);
         }
     }
 
-    function addRow(data) {
-        $("#table-professors-list tbody").append(`
-        <tr>
-            <td>${data.professor_acronyme}</td>
-            <td scope="row">${data.course_id}</td>
-            <td>${data.group_id}</td>
-            <td>${data.quadrimester}</td>
-        </tr>`);
+    function addGroupTable(attributions) {
+        let currentGroupId = attributions[0].group_id;
+        addTitle(currentGroupId);
+        $('#attributions_list').append(`
+            <table class="table" id="table-${currentGroupId}">
+                <thead>
+                    <tr>
+                        <th>Professeur</th>
+                        <th>Cours</th>
+                        <th>Groupe</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        `);
+        attributions.forEach(attribution => {
+            addRow(attribution);
+        });
     }
 
-    function emptyTable() {
-        $("#table-professors-list tbody").empty();
+    function addRow(data) {
+        $(`#table-${data.group_id} tbody`).append(`
+            <tr>
+                <td>${data.professor_acronyme}</td>
+                <td scope="row">${data.course_id}</td>
+                <td>${data.group_id}</td>
+            </tr>
+        `);
+    }
+
+    function removeTable() {
+        $("#attributions_list").empty();
     }
 
     function fetchAttributions() {
