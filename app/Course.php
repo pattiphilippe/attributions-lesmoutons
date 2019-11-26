@@ -30,4 +30,9 @@ class Course extends Model
             ]);
         }
     }
+
+    public function attributions()
+    {
+        return $this->hasMany('App\Attribution');
+    }
 }

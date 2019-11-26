@@ -16,15 +16,15 @@ class CourseController extends Controller
      */
     public function index()
     {
-        if(isset($_GET['option'])) {
-            $select = $_GET['option'];
+        if(isset($_GET['filter'])) {
+            $select = $_GET['filter'];
             if($select == 'coursesAttributed') {
                 return view('courses.index', [
-                    'courses' => $this->getAttributedCourses(),
+                    'courses' => Course::has('attributions')->get(),
                 ]);
             }else if($select == 'coursesNonAttributed') {
                 return view('courses.index', [
-                    'courses' => $this->getNonAttributedCourses(),
+                    'courses' => Course::doesntHave('attributions')->get(),
                 ]);
             }else {
                 return view('courses.index', [
@@ -35,16 +35,6 @@ class CourseController extends Controller
         return view('courses.index', [
             'courses' => Course::all(),
         ]);
-    }
-
-    public function getAttributedCourses() {
-        return DB::select('SELECT courses.id, courses.title, courses.credits, courses.bm1_hours, courses.bm2_hours
-        FROM courses JOIN attributions ON courses.id = attributions.course_id');
-    }
-
-    public function getNonAttributedCourses() {
-        return DB::select('SELECT courses.id, courses.title, courses.credits, courses.bm1_hours, courses.bm2_hours
-        FROM courses LEFT JOIN attributions ON courses.id = attributions.course_id WHERE attributions.course_id is NULL');
     }
 
     /**

@@ -182,6 +182,7 @@ a.action {
     margin-top: 30px;
 }
 
-#form {
-    height: 3%;
+#formFilter {
+    float: right;
+    margin: 15px 15px 0;
 }
