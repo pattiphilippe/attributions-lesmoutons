@@ -20,7 +20,7 @@
 @else
 <div class="form-group">
   <label for="select-groupby">Grouper par</label>
-  <select id="select-groupby">
+  <select name="groupby" id="select-groupby">
       <option value="" selected disabled>Choose here</option>
       <option value="group">Groupe</option>
       <option value="course">Activité d'apprentissage</option>
