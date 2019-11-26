@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+use App\Groupe;
 use App\Course;
 use Illuminate\Http\Request;
 use App\Utilitaries\Util;
@@ -19,21 +19,24 @@ class CourseController extends Controller
         if(isset($_GET['filter'])) {
             $select = $_GET['filter'];
             if($select == 'coursesAttributed') {
+                $count = Groupe::count();
                 return view('courses.index', [
-                    'courses' => Course::has('attributions')->get(),
+                    'courses' => Course::has('attributions')
+                    ->groupBy('courses.id')
+                    ->get()
                 ]);
             }else if($select == 'coursesNonAttributed') {
                 return view('courses.index', [
-                    'courses' => Course::doesntHave('attributions')->get(),
+                    'courses' => Course::doesntHave('attributions')->get()
                 ]);
             }else {
                 return view('courses.index', [
-                    'courses' => Course::all(),
+                    'courses' => Course::all()
                 ]);
             }
         }
         return view('courses.index', [
-            'courses' => Course::all(),
+            'courses' => Course::all()
         ]);
     }
 

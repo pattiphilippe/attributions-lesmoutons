@@ -17,12 +17,12 @@ class Attribution extends Model
         return $this->belongsTo('App\Course');
     }
 
-    public function professeur() 
+    public function professeur()
     {
         return $this->belongsTo('App\Professeur');
     }
 
-    public function groupe() 
+    public function groupe()
     {
         return $this->belongsTo('App\Groupe');
     }
