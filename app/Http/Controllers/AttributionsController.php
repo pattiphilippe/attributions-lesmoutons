@@ -146,8 +146,7 @@ class AttributionsController extends Controller
     public function downloadFileAttribution() 
     {
         $attributions = Attribution::all();
-        $pdf = PDF::loadView('pdf', compact('attributions'));
-
+        $pdf = PDF::loadView('pdf.attributions', compact('attributions'));
         return $pdf->download('attributions.pdf');
     }
 }

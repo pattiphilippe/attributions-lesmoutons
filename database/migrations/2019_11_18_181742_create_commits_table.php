@@ -14,7 +14,8 @@ class CreateCommitsTable extends Migration
     public function up()
     {
         Schema::create('commits', function (Blueprint $table) {
-            $table->string('id', 255)->primary();
+            //$table->string('id', 255)->primary();
+            $table->string('id', 191)->primary();
             $table->string('message', 255);
             $table->string('author', 255);
             $table->timestamps();

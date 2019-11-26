@@ -18,7 +18,7 @@
 <h2>La liste est vide</h2>
 <p>Pas d'attributions 😀</p>
 @else
-<table id="table-professors-list" class="table">
+<table id="table-attribution-list" class="table">
     <thead>
         <tr>
             <th>Professeur Acronyme</th>
@@ -42,6 +42,9 @@
 
 <a id="create-attribution-button" class="btn btn-info" href="{{ route('attributions.create') }}" role="button">Ajouter
     attribution</a>
+
+<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution') }}" role="button">Export PDF</a>
+
 
 <div class="buttonBloc">
     <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
