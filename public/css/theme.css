@@ -181,3 +181,7 @@ a.action {
 .display-errors {
     margin-top: 30px;
 }
+
+#form {
+    height: 3%;
+}
