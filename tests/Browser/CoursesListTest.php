@@ -56,7 +56,9 @@ class CoursesListTest extends DuskTestCase
     public function testWithCoursesAttributed()
     {
         $user = factory(\App\User::class)->create();
-        $attribution = factory(Attribution::class)->create();
+        $attribution = factory(Attribution::class, 10)->create([
+            'course_id' => 'PRJG5',
+        ]);
         $this->browse(function (Browser $browser) use ($user, $attribution) {
             $browser->loginAs($user)
                 ->visit('/courses')
@@ -74,13 +76,13 @@ class CoursesListTest extends DuskTestCase
     public function testWithCoursesNonAttributed()
     {
         $user = factory(\App\User::class)->create();
-        $course = factory(Course::class)->create();
-        $this->browse(function (Browser $browser) use ($user, $course) {
+        $attribution = factory(Attribution::class)->create();
+        $this->browse(function (Browser $browser) use ($user, $attribution) {
             $browser->loginAs($user)
                 ->visit('/courses')
                 ->assertTitle('Liste des Cours')
                 ->select('filter', 'coursesNonAttributed')
-                ->assertSee($course->id);
+                ->assertSee($attribution->id);
         });
     }
 
@@ -148,13 +150,15 @@ class CoursesListTest extends DuskTestCase
     public function testWithAllCourseAttributedWithFilterNonAttributed()
     {
         $user = factory(\App\User::class)->create();
-        $attribution = factory(Attribution::class, 20)->create();
-        $this->browse(function (Browser $browser) use ($user) {
+        $attribution = factory(Attribution::class, 10)->create([
+            'course_id' => 'DONG5',
+        ]);
+        $this->browse(function (Browser $browser) use ($user, $attribution) {
             $browser->loginAs($user)
                 ->visit('/courses')
                 ->assertTitle('Liste des Cours')
                 ->select('filter', 'coursesNonAttributed')
-                ->assertSee('La liste est un peu vide!');
+                ->assertDontSee($attribution->course_id);
         });
     }
 }

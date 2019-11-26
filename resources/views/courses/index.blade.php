@@ -14,10 +14,6 @@
 @endif
 
 <h1>Liste des Cours</h1>
-@if(count($courses) == 0)
-<h2>La liste est un peu vide!</h2>
-<p>Pas de cours disponible 😀</p>
-@else
 <form id="formFilter" class="col-md-3 input-group" action="/courses" method="GET">
     <div class="form-group">
         <label for="filter">Filtre</label>
@@ -34,6 +30,10 @@
         </select>
     </div>
 </form>
+@if(count($courses) == 0)
+<h2>La liste est un peu vide!</h2>
+<p>Pas de cours disponible 😀</p>
+@else
 <table id="table-professeurs-list" class="table">
     <thead>
         <tr>
@@ -56,16 +56,6 @@
             @endforeach
     </tbody>
 </table>
-<script>
-     function showCourses() {
-        $("#formFilter").submit();
-    }
-
-    $("#import-csv").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-</script>
 @endif
 <!-- Form -->
 <form method='post' action='{{ route('upload_course') }}' enctype='multipart/form-data'>
@@ -82,4 +72,14 @@
 <div class="buttonBloc">
     <button type="button" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>
 </div>
+<script>
+    function showCourses() {
+       $("#formFilter").submit();
+   }
+
+   $("#import-csv").on("change", function () {
+       var fileName = $(this).val().split("\\").pop();
+       $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+   });
+</script>
 @endsection
