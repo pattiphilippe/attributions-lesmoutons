@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Groupe;
 use App\Course;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Utilitaries\Util;
 
@@ -18,28 +17,29 @@ class CourseController extends Controller
      */
     public function index()
     {
-        if (isset($_GET['filter'])) {
-            $select = $_GET['filter'];
-            if ($select == 'coursesAttributed') {
-                return view('courses.index', [
-                    'courses' => Course::select('attributions.*', 'courses.*')
-                        ->join('attributions', 'courses.id', '=', 'attributions.course_id')
-                        ->groupBy('courses.id')
-                        ->havingRaw('COUNT(*) = ?', [Groupe::count()])
-                        ->get()
-                ]);
-            } else if ($select == 'coursesNonAttributed') {
-                return view('courses.index', [
-                    'courses' => Course::select('attributions.*', 'courses.*')
-                        ->leftJoin('attributions', 'courses.id', '=', 'attributions.course_id')
-                        ->groupBy('courses.id')
-                        ->havingRaw('COUNT(*) != ?', [Groupe::count()])
-                        ->get()
-                ]);
-            } else {
-                return view('courses.index', [
-                    'courses' => Course::all()
-                ]);
+        if (request()->has('filter')) {
+            switch (request('filter')) {
+                case 'coursesAttributed':
+                    return view('courses.index', [
+                        'courses' => Course::select('attributions.*', 'courses.*')
+                            ->join('attributions', 'courses.id', '=', 'attributions.course_id')
+                            ->groupBy('courses.id',)
+                            ->havingRaw('COUNT(*) = ?', [Groupe::count()])
+                            ->get()
+                    ]);
+                case 'coursesNonAttributed':
+                    return view('courses.index', [
+                        'courses' => Course::select('attributions.*', 'courses.*')
+                            ->leftJoin('attributions', 'courses.id', '=', 'attributions.course_id')
+                            ->groupBy('courses.id')
+                            ->havingRaw('COUNT(*) != ?', [Groupe::count()])
+                            ->get()
+                    ]);
+
+                default:
+                    return view('courses.index', [
+                        'courses' => Course::all()
+                    ]);
             }
         }
         return view('courses.index', [
