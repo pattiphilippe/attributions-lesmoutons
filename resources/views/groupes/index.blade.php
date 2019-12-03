@@ -41,8 +41,13 @@
             <input class="btn btn-info" type='submit' name='submit' value='Import' id='import-csv-button'> </div>
         <div class="custom-file">
             <input type="file" name="file" class="custom-file-input" id="import-csv">
-            <label class="custom-file-label" for="import-csv">Choose csv file</label>
-        </div>
+            <label class="custom-file-label" for="import-csv">Choose csv file</label>    
+    </div>
+    </div>
+        <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" name="check_delete_table" id="check_delete_table" checked>
+        Supprimer la table avant l'import
+        </label>
     </div>
 </form>
 

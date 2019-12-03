@@ -22,6 +22,9 @@ class GroupController extends Controller
 
     public function uploadFileGroup(Request $request)
     {
+        if(Input::get("check_delete_table", true)){
+            Groupe::truncate();
+        }
         Util::handleCSVInsertion($request, [
             "nom",
         ], Groupe::class);

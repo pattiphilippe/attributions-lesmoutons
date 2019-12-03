@@ -66,6 +66,12 @@
             <label class="custom-file-label" for="import-csv">Choose csv file</label>
         </div>
     </div>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" name="check_delete_table" id="check_delete_table" checked>
+        Supprimer la table avant l'import
+      </label>
+    </div>
 </form>
 <div class="buttonBloc">
     <button type="button" onclick="window.location='{{ route('index') }}' "> > vers accueil </button>
