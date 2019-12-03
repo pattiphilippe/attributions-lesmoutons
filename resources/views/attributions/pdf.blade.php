@@ -1,5 +1,12 @@
-<h1>Liste des attributions</h1>
-<table>
+@extends('layouts.pdfLayout')
+@section('content')
+<header>
+        <img id="logo" src="./images/he2b-esi.jpg" alt="HE2B-ESI" />
+
+        <h1>PRJG5 - HE2B ESI </h1>
+    </header>
+    <h2>Liste des attributions</h2>
+<table width="100%">
     <thead>
         <tr>
             <th>Professeur Acronyme</th>
@@ -19,3 +26,4 @@
         @endforeach
     </tbody>
 </table>
+@endsection
