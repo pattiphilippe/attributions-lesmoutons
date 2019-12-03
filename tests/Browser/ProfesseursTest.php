@@ -41,7 +41,7 @@ class ProfesseursTest extends DuskTestCase
             $browser->loginAs($user)
                 ->visit('/professeurs')
                 ->assertSee('Liste de professeurs')
-                ->press('#accueilBtn')
+                ->click('#accueilBtn')
                 ->waitForLocation('/home');
         });
     }

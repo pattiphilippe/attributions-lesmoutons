@@ -20,17 +20,17 @@
     @csrf
     <div class="form-group">
         <label for="professor-select">Entrez l'acronyme</label>
-        <input type="text" class="form-control" name="acronyme"/>
+        <input type="text" class="form-control" name="acronyme" id="acronyme"/>
     </div>
 
     <div class="form-group">
         <label for="name-select">Entrez le nom</label>
-        <input type="text" class="form-control" name="nom"/>
+        <input type="text" class="form-control" name="nom"id="nom"/>
     </div>
 
     <div class="form-group">
         <label for="lastname-select">Entrez le prénom</label>
-                <input type="text" class="form-control" name="prenom"/>
+                <input type="text" class="form-control" name="prenom" id="prenom"/>
     </div>
 
     <button id="submit-add-professor" type="submit" class="btn btn-info">Valider</button>
