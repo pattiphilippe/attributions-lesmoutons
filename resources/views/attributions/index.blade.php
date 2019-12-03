@@ -3,6 +3,7 @@
 @section('title', 'Liste des attributions')
 
 @section('content')
+
 @if(Session::has('warning'))
 <p class="alert alert-danger csv-messages">{{ Session::get('warning') }}</p>
 @endif
@@ -18,7 +19,7 @@
 <h2>La liste est vide</h2>
 <p>Pas d'attributions 😀</p>
 @else
-<table id="table-professors-list" class="table">
+<table id="table-attribution-list" class="table">
     <thead>
         <tr>
             <th>Professeur Acronyme</th>
@@ -43,10 +44,23 @@
 <a id="create-attribution-button" class="btn btn-info" href="{{ route('attributions.create') }}" role="button">Ajouter
     attribution</a>
 
+
+@if(count($attributions) != 0)
+<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution') }}" role="button">Export PDF</a>
+@endif
+
 <div class="buttonBloc">
     <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
         accueil </button>
     {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
+
+
+<script>
+    $("#import-csv").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 
 @endsection

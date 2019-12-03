@@ -9,6 +9,7 @@ use App\Professeur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use PDF;
 
 class AttributionsController extends Controller
 {
@@ -140,5 +141,12 @@ class AttributionsController extends Controller
             'size' => 'Le champ :attribute doit être de taille :size.',
             'between' => 'Le valeur :input du champ :attribute n\'est pas de longueur :min - :max.',
         ];
+    }
+
+    public function downloadFileAttribution() 
+    {
+        $attributions = Attribution::all();
+        $pdf = PDF::loadView('attributions.pdf', compact('attributions'));
+        return $pdf->download('attributions.pdf');
     }
 }
