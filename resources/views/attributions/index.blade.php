@@ -19,26 +19,6 @@
 <h2>La liste est vide</h2>
 <p>Pas d'attributions 😀</p>
 @else
-<table id="table-attribution-list" class="table">
-    <thead>
-        <tr>
-            <th>Professeur Acronyme</th>
-            <th>Cours</th>
-            <th>Groupe</th>
-            <th>Quadrimestre</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($attributions as $attribution)
-        <tr>
-            <td scope="row">{{$attribution["professor_acronyme"]}} </td>
-            <td>{{$attribution["course_id"]}} </td>
-            <td>{{$attribution["group_id"]}} </td>
-            <td>{{$attribution["quadrimester"]}} </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
 <div class="form-group">
   <label for="select-groupby">Grouper par</label>
   <select name="groupby" id="select-groupby">
@@ -85,19 +65,11 @@
     {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> groupby_group
 <script>
     $("#import-csv").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
-<<<<<<< HEAD
-</script>
-
-=======
 
     $(() => {
         initSelectListener();
@@ -178,5 +150,4 @@
         return map;
     }
 </script>
->>>>>>> groupby_group
 @endsection
