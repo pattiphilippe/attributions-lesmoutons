@@ -47,7 +47,7 @@
 </form>
 
 <div class="buttonBloc">
-    <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('index') }}' "> > vers
+    <button type="button" id="accueilBtn" name="accueilBtn" onclick="window.location='{{ route('home') }}' "> > vers
         accueil </button>
     {{-- <button type="button" onclick="window.location='{{ route('courses.create') }}' "> > créer</button> --}}
 </div>
