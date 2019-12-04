@@ -46,7 +46,6 @@
         </tr>
     </thead>
     <tbody>
-        <form id="modify" class="col-md-3 input-group" action="/courses" method="GET">
             @foreach ($courses as $course)
             <tr>
                 <td scope="row">{{$course->id}} </td>
@@ -54,10 +53,11 @@
                 <td>{{$course->credits}} </td>
                 <td>{{$course->bm1_hours}} </td>
                 <td>{{$course->bm2_hours}} </td>
-            <td><button type="submit" class="btn btn-danger" onclick="{{\App\Http\Controllers\CourseController::removeCourse($course->id)}}">Supprimer</button></td>
+            <form id="formFilter" class="col-md-3 input-group" action="/courses" method="GET">
+            <td><input type="submit" name="delete" class="btn btn-danger" value="<?php echo $course->id;?>"/></td>
+            </form>
             </tr>
             @endforeach
-        </form>
     </tbody>
 </table>
 @endif
@@ -79,10 +79,10 @@
 <script>
     function showCourses() {
        $("#formFilter").submit();
-   }
-   $("#import-csv").on("change", function () {
+    }
+    $("#import-csv").on("change", function () {
        var fileName = $(this).val().split("\\").pop();
        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-   });
+    });
 </script>
 @endsection

@@ -16,6 +16,10 @@ class CourseController extends Controller
      */
     public function index()
     {
+        if(request()->has('delete')) {
+            $id = request('delete');
+            $this->removeCourse($id);
+        }
         if (request()->has('filter')) {
             switch (request('filter')) {
                 case 'coursesAttributed':
@@ -34,7 +38,6 @@ class CourseController extends Controller
                             ->havingRaw('COUNT(*) != ?', [Groupe::count()])
                             ->get(),
                     ]);
-
                 default:
                     return view('courses.index', [
                         'courses' => Course::all(),
@@ -46,7 +49,7 @@ class CourseController extends Controller
         ]);
     }
 
-    public static function removeCourse($course_id) {
+    public function removeCourse($course_id) {
         $course = new Course;
         $course->remove($course_id);
     }
