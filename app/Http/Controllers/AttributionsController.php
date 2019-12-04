@@ -82,7 +82,14 @@ class AttributionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $attribution = Attribution::find($id);
+        return view('attributions.edit', [
+            'attribution' => $attribution,
+            'professors' => Professeur::all(),
+            'courses' => Course::all(),
+            'groupes' => Groupe::all(),
+        ]);
+
     }
 
     /**
@@ -94,7 +101,21 @@ class AttributionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = Validator::make(
+            $request->all(),
+            $this->rules($request),
+            $this->errorMessages())
+            ->validate();
+
+        $attribution = Attribution::find($id);
+        $attribution->update(['professor_acronyme' => $validatedData['professor'],
+        'course_id' => $validatedData['course'],
+        'group_id' => $validatedData['group'],
+        'quadrimester' => 2, 
+        ]);
+        return redirect()->route('attributions.index')
+        ->with('success','Attribution mise à jour avec succès !');
+
     }
 
     /**
@@ -105,7 +126,9 @@ class AttributionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $attribution = Attribution::find($id);
+        $attribution->delete();
+        return redirect()->route('attributions.index')->with('success','Attribution supprimée avec succès !');
     }
 
     public function rules(Request $request)

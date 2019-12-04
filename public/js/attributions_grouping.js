@@ -3,19 +3,19 @@ $(() => {
     initSelectListener();
 });
 
-function csvImportListener(){
-    $("#import-csv").on("change", function() {
+function csvImportListener() {
+    $("#import-csv").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 }
 
 function initSelectListener() {
-    $("#select-groupby").on('change', function() {
-        if(this.value == "group") {
+    $("#select-groupby").on('change', function () {
+        if (this.value == "group") {
             setAttributionsGroupedBy("group");
         }
-        if(this.value == "course") {
+        if (this.value == "course") {
             setAttributionsGroupedBy("course");
         }
     });
@@ -65,6 +65,7 @@ function createEmptyTable(title) {
                     <th>Professeur</th>
                     <th>Cours</th>
                     <th>Groupe</th>
+                    <th>Action<th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -72,13 +73,22 @@ function createEmptyTable(title) {
     `);
 }
 
-function fillTable(title, attributions){
+function fillTable(title, attributions) {
+    var csrfVar = $('meta[name="csrf-token"]').attr('content');
     attributions.forEach(attribution => {
         $(`#table-${title} tbody`).append(`
             <tr>
                 <td>${attribution.professor_acronyme}</td>
                 <td scope="row">${attribution.course_id}</td>
                 <td>${attribution.group_id}</td>
+                <td>
+                <form class="form-btnAction" action="/attributions/${attribution.id}" method="POST">
+                    <a class="btn btn-primary" href="/attributions/${attribution.id}/edit">Editer</a>
+                    <input name="_token" value="` + csrfVar + `" type="hidden">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" class="btn btn-danger" value="Supprimer" />
+                </form>
+            </td>
             </tr>
         `);
     });
@@ -87,4 +97,3 @@ function fillTable(title, attributions){
 function removeTable() {
     $("#attributions_list").empty();
 }
-

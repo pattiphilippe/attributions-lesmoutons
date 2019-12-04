@@ -20,12 +20,12 @@
 <p>Pas d'attributions 😀</p>
 @else
 <div class="form-group">
-  <label for="select-groupby">Grouper par</label>
-  <select name="groupby" id="select-groupby">
-      <option value="" selected disabled>Choose here</option>
-      <option value="group">Groupe</option>
-      <option value="course">Activité d'apprentissage</option>
-  </select>
+    <label for="select-groupby">Grouper par</label>
+    <select name="groupby" id="select-groupby">
+        <option value="" selected disabled>Choose here</option>
+        <option value="group">Groupe</option>
+        <option value="course">Activité d'apprentissage</option>
+    </select>
 </div>
 <div id="attributions_list">
     <table id="table-professors-list" class="table">
@@ -35,6 +35,7 @@
                 <th>Cours</th>
                 <th>Groupe</th>
                 <th>Quadrimestre</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -44,6 +45,14 @@
                 <td>{{$attribution["course_id"]}} </td>
                 <td>{{$attribution["group_id"]}} </td>
                 <td>{{$attribution["quadrimester"]}} </td>
+                <td>
+                    <form class="form-btnAction" action="{{ route('attributions.destroy',$attribution["id"]) }}" method="POST">
+                        <a class="btn btn-primary" href="{{ route('attributions.edit',$attribution["id"]) }}">Editer</a>
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-danger" value="Supprimer" />
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

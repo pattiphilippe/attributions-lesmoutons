@@ -186,3 +186,7 @@ a.action {
     float: right;
     margin: 15px 15px 0;
 }
+
+.form-btnAction {
+    display: inline;
+}
