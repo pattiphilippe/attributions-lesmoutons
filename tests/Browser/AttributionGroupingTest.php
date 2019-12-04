@@ -96,7 +96,57 @@ class AttributionGroupingTest extends DuskTestCase
                 ->visit('/attributions')
                 ->assertSee('La liste est vide');
         });
+    }
 
+    public function testGroupingByCourseWorkTest()
+    {
+        $this->initTables();
+        $user = factory(User::class)->create();
+
+        $attributions = [
+            $this->createAttribution("WEBG5", "JLC", "E12"),
+            $this->createAttribution("DEV4", "NVS", "E11"),
+            $this->createAttribution("SYSG5", "MBA", "E12"),
+            $this->createAttribution("WEBG5", "JLC", "E11"),
+            $this->createAttribution("DEV4", "SRV", "E12"),
+        ];
+
+        $this->browse(function (Browser $browser) use ($user, $attributions) {
+            $browser->loginAs($user)
+                ->visit('/attributions')
+                ->select('groupby', 'group')
+                ->select('groupby', 'course')
+                ->waitForText('E11')
+                ->assertPresent('#table-WEBG5')
+                ->assertPresent('#table-DEV4')
+                ->assertPresent('#table-SYSG5');
+        });
+
+    }
+
+    public function testGroupingByCourseWorkTitlesTest()
+    {
+        $this->initTables();
+        $user = factory(User::class)->create();
+
+        $attributions = [
+            $this->createAttribution("WEBG5", "JLC", "E12"),
+            $this->createAttribution("DEV4", "NVS", "E11"),
+            $this->createAttribution("SYSG5", "MBA", "E12"),
+            $this->createAttribution("WEBG5", "JLC", "E11"),
+            $this->createAttribution("DEV4", "SRV", "E12"),
+        ];
+
+        $this->browse(function (Browser $browser) use ($user, $attributions) {
+            $browser->loginAs($user)
+                ->visit('/attributions')
+                ->select('groupby', 'group')
+                ->select('groupby', 'course')
+                ->waitForText('E11')
+                ->assertSeeIn('h3:nth-of-type(1)', 'WEBG5')
+                ->assertSeeIn('h3:nth-of-type(2)', 'DEV4')
+                ->assertSeeIn('h3:nth-of-type(3)', 'SYSG5');
+        });
     }
 
 }
