@@ -65,7 +65,7 @@ function createEmptyTable(title) {
                     <th>Professeur</th>
                     <th>Cours</th>
                     <th>Groupe</th>
-                    <th>Action<th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -83,11 +83,11 @@ function fillTable(title, attributions) {
                 <td>${attribution.group_id}</td>
                 <td>
                 <form class="form-btnAction" action="/attributions/${attribution.id}" method="POST">
-                    <a class="btn btn-primary" href="/attributions/${attribution.id}/edit">Editer</a>
+                    <a class="btn btn-primary" href="/attributions/${attribution.id}/edit"><i class="fas fa-edit"></i> Editer</a>
                     <input name="_token" value="` + csrfVar + `" type="hidden">
                     <input type="hidden" name="_method" value="DELETE">
-                    <input type="submit" class="btn btn-danger" value="Supprimer" />
-                </form>
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                    </form>
             </td>
             </tr>
         `);

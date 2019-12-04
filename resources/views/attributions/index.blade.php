@@ -47,10 +47,11 @@
                 <td>{{$attribution["quadrimester"]}} </td>
                 <td>
                     <form class="form-btnAction" action="{{ route('attributions.destroy',$attribution["id"]) }}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('attributions.edit',$attribution["id"]) }}">Editer</a>
+                        <a class="btn btn-primary" href="{{ route('attributions.edit',$attribution["id"]) }}">
+                            <i class="fas fa-edit"></i> Editer</a>
                         @csrf
                         @method('DELETE')
-                        <input type="submit" class="btn btn-danger" value="Supprimer" />
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Supprimer</button>
                     </form>
                 </td>
             </tr>
