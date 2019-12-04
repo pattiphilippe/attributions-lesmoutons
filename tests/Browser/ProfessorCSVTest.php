@@ -5,6 +5,7 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Illuminate\Support\Facades\DB;
 
 class ProfessorCSVTest extends DuskTestCase
 {
@@ -77,5 +78,29 @@ class ProfessorCSVTest extends DuskTestCase
                 ->pause(500);
         });
     }
+    public function test_import_csv_delete_table()
+    {
+        $filePath = 'uploads/random_prof.csv';
+        file_put_contents($filePath, "acronyme,nom,prenom\nJDO,Doe,John");
+        DB::table('professeurs')->insert([
+            'acronyme'=>"JVO",
+            'nom'=>"Van Oye",
+            'prenom'=>"Julien"
+        ]);
+        $user = factory(\App\User::class)->create();
+        $this->browse(function (Browser $browser) use ($user, $filePath) {
+            $browser->loginAs($user)
+                ->visit('/professeurs')
+                ->assertSee('Liste de professeurs')
+                ->check('check_delete_table')
+                ->attach('file', $filePath)
+                ->click('#import-csv-button')
+                ->waitForText('JDO')
+                ->waitForText('Doe')
+                ->waitForText('John')
+                ->assertDontSee('JVO');
+        });
+    }
+    
 
 }

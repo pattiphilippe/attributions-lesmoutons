@@ -77,4 +77,5 @@ class ProfesseursTest extends DuskTestCase
                 ->assertSee('La liste est vide');
         });
     }
+
 }
