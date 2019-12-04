@@ -22,4 +22,9 @@ class Groupe extends Model
             ]);
         }
     }
+
+    public static function deleteAll()
+    {
+        DB::table('groupes')->delete();
+    }
 }

@@ -15,7 +15,7 @@ class Util
      * @param array $attributes Attributes of the model.
      * @param model $model Model to handle.
      */
-    public static function handleCSVInsertion($request, $attributes, $model)
+    public static function handleCSVInsertion($request, $attributes, $model, $deleteBeforeInsert = true)
     {
         try {
             if ($request->file == null) {
@@ -62,6 +62,10 @@ class Util
                         }
 
                         fclose($file);
+
+                        if ($deleteBeforeInsert) {
+                            $model::deleteAll();
+                        }
 
                         foreach ($importData_arr as $importData) {
                             $insertData = array();

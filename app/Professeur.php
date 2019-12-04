@@ -10,10 +10,10 @@ class Professeur extends Model
     protected $primaryKey = 'acronyme';
     protected $keyType = 'string';
     protected $fillable = [
-        'acronyme', 'nom' , 'prenom',
+        'acronyme', 'nom', 'prenom',
     ];
-    
-    public  $timestamps = false;
+
+    public $timestamps = false;
     public $incrementing = false;
 
     public static function insertData($data)
@@ -27,5 +27,10 @@ class Professeur extends Model
                 'prenom' => $data['prenom'],
             ]);
         }
+    }
+
+    public static function deleteAll()
+    {
+        DB::table('professeurs')->delete();
     }
 }

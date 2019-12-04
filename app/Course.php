@@ -30,4 +30,9 @@ class Course extends Model
             ]);
         }
     }
+
+    public static function deleteAll()
+    {
+        DB::table('courses')->delete();
+    }
 }

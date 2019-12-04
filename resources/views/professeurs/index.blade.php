@@ -40,18 +40,22 @@
 <!-- Form -->
 <form method='post' action='{{ route('upload_professor') }}' enctype='multipart/form-data'>
     @csrf
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <input class="btn btn-info" type='submit' name='submit' value='Import' id='import-csv-button'> </div>
-        <div class="custom-file">
-            <input type="file" name="file" class="custom-file-input" id="import-csv">
-            <label class="custom-file-label" for="import-csv">Choose csv file</label>
+    <div class="import-csv-container">
+        <div class="form-check checkbox-csv">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="check_delete_table" id="check_delete_table" checked>
+                Supprimer la table avant l'import
+            </label>
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <input class="btn btn-info" type='submit' name='submit' value='Import' id='import-csv-button'> </div>
+            <div class="custom-file">
+                <input type="file" name="file" class="custom-file-input" id="import-csv">
+                <label class="custom-file-label" for="import-csv">Choose csv file</label>
+            </div>
         </div>
     </div>
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" name="check_delete_table" id="check_delete_table" checked>
-          Supprimer la table avant l'import
-        </label>
 </form>
 <a id="create-professor-button" class="btn btn-info" href="{{ route('professeurs.create') }}" role="button">Ajouter
     professeur</a>

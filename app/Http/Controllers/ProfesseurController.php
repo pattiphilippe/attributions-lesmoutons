@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-
-
 class ProfesseurController extends Controller
 {
     /**
@@ -106,7 +104,7 @@ class ProfesseurController extends Controller
     {
         Util::handleCSVInsertion($request, [
             "acronyme", "nom", "prenom",
-        ], Professeur::class);
+        ], Professeur::class, $request->has('check_delete_table'));
 
         return redirect('professeurs');
     }
