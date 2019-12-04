@@ -56,7 +56,7 @@
                 <td>{{$course->bm1_hours}} </td>
                 <td>{{$course->bm2_hours}} </td>
             <form id="formFilter" class="col-md-3 input-group" action="/courses" method="GET">
-            <td><button type="submit" name="delete_button" class="btn btn-danger">Supprimer</button></td>
+            <td><button type="submit" id="delete_button" name="delete_button" class="btn btn-danger">Supprimer</button></td>
             </form>
             </tr>
             @endforeach

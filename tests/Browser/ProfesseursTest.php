@@ -77,4 +77,20 @@ class ProfesseursTest extends DuskTestCase
                 ->assertSee('La liste est vide');
         });
     }
+
+    public function testWithProfDeleted()
+    {
+        $user = factory(\App\User::class)->create();
+        $prof = factory(Professeur::class)->create([
+            'acronyme' => 'ABS',
+        ]);
+        $this->browse(function (Browser $browser) use ($user, $prof) {
+            $browser->loginAs($user)
+                ->visit('/professeurs')
+                ->assertTitle('Liste de professeurs')
+                ->click('#delete_button')
+                ->assertDontSee($prof->acronyme);
+        });
+    }
+
 }

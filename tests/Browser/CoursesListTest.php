@@ -123,4 +123,20 @@ class CoursesListTest extends DuskTestCase
                 ->assertSee($course->id);
         });
     }
+
+    public function testWithCourseDeleted()
+    {
+        $user = factory(\App\User::class)->create();
+        $course = factory(Course::class)->create([
+            'id' => 'DONG5',
+        ]);
+        $this->browse(function (Browser $browser) use ($user, $course) {
+            $browser->loginAs($user)
+                ->visit('/courses')
+                ->assertTitle('Liste des Cours')
+                ->click('#delete_button')
+                ->assertDontSee($course->id);
+        });
+    }
+
 }

@@ -30,7 +30,7 @@
         @csrf
             <tr>
                 <td scope="row">{{$group['nom']}} </td>
-                <td><button type="submit" name="deleteGroup" class="btn btn-danger">Supprimer</button></td>
+                <td><button type="submit" id="delete_button" name="deleteGroup" class="btn btn-danger">Supprimer</button></td>
             </tr>
         </form>
         @endforeach

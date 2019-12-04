@@ -35,7 +35,7 @@
                     <td scope="row">{{$professeur["acronyme"]}} </td>
                     <td>{{$professeur["nom"]}} </td>
                     <td>{{$professeur["prenom"]}} </td>
-                    <td><button type="submit" name="deleteProf" class="btn btn-danger">Supprimer</button></td>
+                    <td><button type="submit" id="delete_button" name="deleteProf" class="btn btn-danger">Supprimer</button></td>
                 </tr>
             </form>
         @endforeach
