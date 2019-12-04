@@ -16,8 +16,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        if(request()->has('delete')) {
-            $id = request('delete');
+        if(request()->has('deleteCourse')) {
+            $id = request('deleteCourse');
             $this->removeCourse($id);
         }
         if (request()->has('filter')) {

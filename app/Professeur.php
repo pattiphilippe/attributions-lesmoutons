@@ -9,7 +9,7 @@ class Professeur extends Model
 {
     protected $primaryKey = 'acronyme';
     protected $keyType = 'string';
-    
+
     public  $timestamps = false;
     public $incrementing = false;
 
@@ -25,4 +25,9 @@ class Professeur extends Model
             ]);
         }
     }
+
+    public function remove($acro) {
+        DB::table('professeurs')->where('acronyme', $acro)->delete();
+    }
+
 }

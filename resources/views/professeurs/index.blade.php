@@ -24,6 +24,7 @@
             <th>Acronyme</th>
             <th>Nom</th>
             <th>Prenom</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +33,9 @@
             <td scope="row">{{$professeur["acronyme"]}} </td>
             <td>{{$professeur["nom"]}} </td>
             <td>{{$professeur["prenom"]}} </td>
+            <form id="formFilter" class="col-md-3 input-group" action="/professeurs" method="GET">
+                <td><input type="submit" name="deleteProf" class="btn btn-danger" value="<?php echo $professeur->acronyme;?>"/></td>
+            </form>
         </tr>
         @endforeach
     </tbody>

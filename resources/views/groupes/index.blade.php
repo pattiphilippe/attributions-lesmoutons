@@ -21,12 +21,16 @@
     <thead>
         <tr>
             <th>nom</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach ($groupes as $group)
         <tr>
             <td scope="row">{{$group['nom']}} </td>
+            <form id="formFilter" class="col-md-3 input-group" action="/groupes" method="GET">
+                <td><input type="submit" name="deleteGroup" class="btn btn-danger" value="<?php echo $group->nom;?>"/></td>
+            </form>
         </tr>
         @endforeach
     </tbody>

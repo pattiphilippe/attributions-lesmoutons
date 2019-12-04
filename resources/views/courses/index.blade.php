@@ -54,7 +54,7 @@
                 <td>{{$course->bm1_hours}} </td>
                 <td>{{$course->bm2_hours}} </td>
             <form id="formFilter" class="col-md-3 input-group" action="/courses" method="GET">
-            <td><input type="submit" name="delete" class="btn btn-danger" value="<?php echo $course->id;?>"/></td>
+            <td><input type="submit" name="deleteCourse" class="btn btn-danger" value="<?php echo $course->id;?>"/></td>
             </form>
             </tr>
             @endforeach

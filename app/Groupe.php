@@ -22,4 +22,9 @@ class Groupe extends Model
             ]);
         }
     }
+
+    public function remove($name) {
+        DB::table('groupes')->where('nom', $name)->delete();
+    }
+
 }
