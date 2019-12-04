@@ -15,18 +15,14 @@ class GroupController extends Controller
      */
     public function index()
     {
-        if(request()->has('deleteGroup')) {
-            $name = request('deleteGroup');
-            $this->removeGroup($name);
-        }
         return view('groupes.index', [
             'groupes' => Groupe::all(),
         ]);
     }
 
     public function removeGroup($group_name) {
-        $group = new Groupe;
-        $group->remove($group_name);
+        Groupe::where('nom', $group_name)->delete();
+        return redirect('/groupes');
     }
 
     public function uploadFileGroup(Request $request)

@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/delete/{id}', 'CourseController@removeCourse');
     Route::post('/delete_professor/{acronym}', 'ProfesseurController@removeProf');
+    Route::post('/delete_group/{name}', 'GroupController@removeGroup');
 
     Route::get('/downloadFileAttribution','AttributionsController@downloadFileAttribution')->name('download_attribution');
 
