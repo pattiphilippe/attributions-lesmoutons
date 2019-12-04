@@ -103,7 +103,7 @@ class AttributionsController extends Controller
     {
         $validatedData = Validator::make(
             $request->all(),
-            $this->rules($request),
+            $this->rulesOnUpdate($request,$id),
             $this->errorMessages())
             ->validate();
 
@@ -135,7 +135,7 @@ class AttributionsController extends Controller
     {
         return [
             'professor' => [
-                'required', 'size:3', 'exists:professeurs,acronyme',
+                'required', 'size:3', 'exists:professeurs,acronyme', 
                 Rule::unique('attributions', 'professor_acronyme')->where(function ($query) use ($request) {
                     return $query->where('professor_acronyme', $request->professor)
                         ->where('course_id', $request->course)
@@ -144,6 +144,30 @@ class AttributionsController extends Controller
             'course' => [
                 'required', 'exists:courses,id',
                 Rule::unique('attributions', 'course_id')->where(function ($query) use ($request) {
+                    return $query->where('professor_acronyme', '!=', $request->professor)
+                        ->where('course_id', $request->course)
+                        ->where('group_id', $request->group);
+                })],
+            'group' => ['required', 'exists:groupes,nom'],
+        ];
+    }
+
+    /**
+     * Rules on update attribution (Ignoring current id of the attribution)
+     */
+    public function rulesOnUpdate(Request $request,$id)
+    {
+        return [
+            'professor' => [
+                'required', 'size:3', 'exists:professeurs,acronyme', 
+                Rule::unique('attributions', 'professor_acronyme')->ignore($id)->where(function ($query) use ($request) {
+                    return $query->where('professor_acronyme', $request->professor)
+                        ->where('course_id', $request->course)
+                        ->where('group_id', $request->group);
+                })],
+            'course' => [
+                'required', 'exists:courses,id',
+                Rule::unique('attributions', 'course_id')->ignore($id)->where(function ($query) use ($request) {
                     return $query->where('professor_acronyme', '!=', $request->professor)
                         ->where('course_id', $request->course)
                         ->where('group_id', $request->group);

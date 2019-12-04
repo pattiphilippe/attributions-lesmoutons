@@ -75,5 +75,5 @@
 </div>
 
 <script src="{{ asset('js/attributions_grouping.js') }}"></script>
-
 @endsection
+

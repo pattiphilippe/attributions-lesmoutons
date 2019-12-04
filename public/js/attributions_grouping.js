@@ -97,3 +97,7 @@ function fillTable(title, attributions) {
 function removeTable() {
     $("#attributions_list").empty();
 }
+
+$(".form-btnAction").on("submit", function () {
+    return confirm("Etes-vous sûr de vouloir supprimer cet élement 😢 ?");
+});
