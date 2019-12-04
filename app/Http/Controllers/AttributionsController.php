@@ -50,7 +50,8 @@ class AttributionsController extends Controller
         $validatedData = Validator::make(
             $request->all(),
             $this->rules($request),
-            $this->errorMessages())
+            $this->errorMessages()
+        )
             ->validate();
 
         Attribution::create([
@@ -117,14 +118,16 @@ class AttributionsController extends Controller
                     return $query->where('professor_acronyme', $request->professor)
                         ->where('course_id', $request->course)
                         ->where('group_id', $request->group);
-                })],
+                })
+            ],
             'course' => [
                 'required', 'exists:courses,id',
                 Rule::unique('attributions', 'course_id')->where(function ($query) use ($request) {
                     return $query->where('professor_acronyme', '!=', $request->professor)
                         ->where('course_id', $request->course)
                         ->where('group_id', $request->group);
-                })],
+                })
+            ],
             'group' => ['required', 'exists:groupes,nom'],
         ];
     }
@@ -143,10 +146,28 @@ class AttributionsController extends Controller
         ];
     }
 
-    public function downloadFileAttribution() 
+    public function downloadFileAttribution($filter)
     {
+        if ($filter != 'null') {
+            switch ($filter) {
+                case "group_id":
+                    $attributions = Attribution::all()->groupBy('group_id');
+                    break;
+
+                case "course_id":
+                    $attributions = Attribution::all()->groupBy('course_id');
+                    break;
+
+                default:
+                    $attributions = Attribution::all();
+                    break;
+            }
+            $pdf = PDF::loadView('attributions.pdf', compact('attributions', 'filter'));
+            return $pdf->download('attributions.pdf');
+        }
+
         $attributions = Attribution::all();
-        $pdf = PDF::loadView('attributions.pdf', compact('attributions'));
+        $pdf = PDF::loadView('attributions.pdf', compact('attributions', 'filter'));
         return $pdf->download('attributions.pdf');
     }
 }
