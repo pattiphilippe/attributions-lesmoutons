@@ -31,10 +31,6 @@ class Course extends Model
         }
     }
 
-    public function remove($id) {
-        DB::table('courses')->where('id', $id)->delete();
-    }
-
     public function attributions()
     {
         return $this->hasMany('App\Attribution');

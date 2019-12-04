@@ -47,6 +47,8 @@
     </thead>
     <tbody>
             @foreach ($courses as $course)
+            <form action="{{url("/delete/{$course->id}")}}" method="post">
+            @csrf
             <tr>
                 <td scope="row">{{$course->id}} </td>
                 <td>{{$course->title}} </td>
@@ -54,7 +56,7 @@
                 <td>{{$course->bm1_hours}} </td>
                 <td>{{$course->bm2_hours}} </td>
             <form id="formFilter" class="col-md-3 input-group" action="/courses" method="GET">
-            <td><input type="submit" name="deleteCourse" class="btn btn-danger" value="<?php echo $course->id;?>"/></td>
+            <td><button type="submit" name="delete_button" class="btn btn-danger">Supprimer</button></td>
             </form>
             </tr>
             @endforeach

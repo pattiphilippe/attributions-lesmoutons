@@ -16,10 +16,6 @@ class CourseController extends Controller
      */
     public function index()
     {
-        if(request()->has('deleteCourse')) {
-            $id = request('deleteCourse');
-            $this->removeCourse($id);
-        }
         if (request()->has('filter')) {
             switch (request('filter')) {
                 case 'coursesAttributed':
@@ -50,8 +46,8 @@ class CourseController extends Controller
     }
 
     public function removeCourse($course_id) {
-        $course = new Course;
-        $course->remove($course_id);
+        Course::where('id', $course_id)->delete();
+        return redirect('/courses');
     }
 
     /**
