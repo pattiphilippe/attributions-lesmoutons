@@ -15,18 +15,14 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        if(request()->has('deleteProf')) {
-            $acro = request('deleteProf');
-            $this->removeProf($acro);
-        }
         return view('professeurs.index', [
             'professeurs' => Professeur::all(),
         ]);
     }
 
     public function removeProf($prof_acro) {
-        $prof = new Professeur;
-        $prof->remove($prof_acro);
+        Professeur::where('acronyme', $prof_acro)->delete();
+        return redirect('/professeurs');
     }
 
     /**

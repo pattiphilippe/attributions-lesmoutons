@@ -29,14 +29,15 @@
     </thead>
     <tbody>
         @foreach ($professeurs as $professeur)
-        <tr>
-            <td scope="row">{{$professeur["acronyme"]}} </td>
-            <td>{{$professeur["nom"]}} </td>
-            <td>{{$professeur["prenom"]}} </td>
-            <form id="formFilter" class="col-md-3 input-group" action="/professeurs" method="GET">
-                <td><input type="submit" name="deleteProf" class="btn btn-danger" value="<?php echo $professeur->acronyme;?>"/></td>
+            <form action="{{url("/delete_professor/{$professeur["acronyme"]}")}}" method="post">
+                @csrf
+                <tr>
+                    <td scope="row">{{$professeur["acronyme"]}} </td>
+                    <td>{{$professeur["nom"]}} </td>
+                    <td>{{$professeur["prenom"]}} </td>
+                    <td><button type="submit" name="deleteProf" class="btn btn-danger">Supprimer</button></td>
+                </tr>
             </form>
-        </tr>
         @endforeach
     </tbody>
 </table>

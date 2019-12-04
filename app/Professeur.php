@@ -26,8 +26,4 @@ class Professeur extends Model
         }
     }
 
-    public function remove($acro) {
-        DB::table('professeurs')->where('acronyme', $acro)->delete();
-    }
-
 }
