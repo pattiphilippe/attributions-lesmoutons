@@ -46,6 +46,11 @@ class CourseController extends Controller
         ]);
     }
 
+    public static function removeCourse($course_id) {
+        $course = new Course;
+        $course->remove($course_id);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
