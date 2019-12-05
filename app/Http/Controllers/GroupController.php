@@ -21,7 +21,7 @@ class GroupController extends Controller
     }
 
     public function removeGroup($group_name) {
-        Groupe::where('nom', $group_name)->delete();
+        Groupe::find($group_name)->delete();
         return redirect('/groupes');
     }
 

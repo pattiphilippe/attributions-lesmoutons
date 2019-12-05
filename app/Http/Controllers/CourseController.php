@@ -46,7 +46,7 @@ class CourseController extends Controller
     }
 
     public function removeCourse($course_id) {
-        Course::where('id', $course_id)->delete();
+        Course::find($course_id)->delete();
         return redirect('/courses');
     }
 

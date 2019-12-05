@@ -34,7 +34,8 @@
                 <td>{{$professeur["nom"]}} </td>
                 <td>{{$professeur["prenom"]}} </td>
                 <td>
-                    <a id="delete_button" name="deleteProf" class="btn btn-danger" href="{{ route('delete_professor', ['acronym' => $professeur["acronyme"]]) }}">
+                    <a id="delete_button" name="deleteProf" class="btn btn-danger delete"
+                    href="{{ route('delete_professor', ['acronym' => $professeur["acronyme"]]) }}">
                         Supprimer
                     </a>
                 </td>

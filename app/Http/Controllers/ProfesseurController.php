@@ -21,7 +21,7 @@ class ProfesseurController extends Controller
     }
 
     public function removeProf($prof_acro) {
-        Professeur::where('acronyme', $prof_acro)->delete();
+        Professeur::find($prof_acro)->delete();
         return redirect('/professeurs');
     }
 
