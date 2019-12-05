@@ -88,17 +88,18 @@
             console.log($(this).attr('id'));
             $(this).on('click', () => {
                 let row = $(this);
-
-                $.ajax({
-                    url: "/delete_professor/" + $(this).data('acronyme'),
-                    type: 'DELETE',
-                    success: function(result) {
-                        row.parent().parent().remove();
-                    },
-                    error: function (request, status, error) {
-                        console.log(request.responseText);
-                    }
-                });
+                if(confirm("Voulez vous vraiment supprimer ce professeur?")){
+                    $.ajax({
+                        url: "/delete_professor/" + $(this).data('acronyme'),
+                        type: 'DELETE',
+                        success: function(result) {
+                            row.parent().parent().remove();
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                        }
+                    });
+                }
             });
         });
     }
