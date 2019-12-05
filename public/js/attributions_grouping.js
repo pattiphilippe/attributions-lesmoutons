@@ -87,7 +87,7 @@ function fillTable(title, attributions) {
                     <a class="btn btn-primary" id="edit-${attribution.id}" href="/attributions/${attribution.id}/edit"><i class="fas fa-edit"></i> Editer</a>
                     <input name="_token" value="` + csrfVar + `" type="hidden">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" id="delete-${attribution.id}" class="btn btn-danger" name="submit-delete" onclick="return confirm('Etes-vous sûr de supprimer cet élement ? 😢');"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                    <button type="submit" id="delete-${attribution.id}" class="btn btn-danger" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette attribution ? 😢');"><i class="fas fa-trash-alt"></i> Supprimer</button>
                     </form>
             </td>
             </tr>

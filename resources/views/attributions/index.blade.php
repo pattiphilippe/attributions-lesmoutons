@@ -53,8 +53,8 @@
                             <i class="fas fa-edit"></i> Editer</a>
                         @csrf
                         @method('DELETE')
-                        <button type="submit" id="delete-{{$attribution['id']}}" name="submit-delete" class="btn btn-danger"
-                            onclick="return confirm('Etes-vous sûr de supprimer cet élement ? 😢');"><i
+                        <button type="submit" id="delete-{{$attribution['id']}}" class="btn btn-danger"
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer cette attribution ? 😢');"><i
                                 class="fas fa-trash-alt"></i> Supprimer</button>
                     </form>
                 </td>
