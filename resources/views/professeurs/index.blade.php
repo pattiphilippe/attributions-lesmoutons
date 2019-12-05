@@ -28,16 +28,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($professeurs as $professeur)
-            <form action="{{url("/delete_professor/{$professeur["acronyme"]}")}}" method="post">
+        @foreach ($professeurs as $professeur)   
+            <tr>
+                <td scope="row">{{$professeur["acronyme"]}} </td>
+                <td>{{$professeur["nom"]}} </td>
+                <td>{{$professeur["prenom"]}} </td>
+                <form action="{{url("/delete_professor/{$professeur["acronyme"]}")}}" method="post">
                 @csrf
-                <tr>
-                    <td scope="row">{{$professeur["acronyme"]}} </td>
-                    <td>{{$professeur["nom"]}} </td>
-                    <td>{{$professeur["prenom"]}} </td>
                     <td><button type="submit" id="delete_button" name="deleteProf" class="btn btn-danger">Supprimer</button></td>
-                </tr>
-            </form>
+                </form>
+            </tr>
         @endforeach
     </tbody>
 </table>

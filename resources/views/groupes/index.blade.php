@@ -26,13 +26,15 @@
     </thead>
     <tbody>
         @foreach ($groupes as $group)
-        <form action="{{url("/delete_group/{$group["nom"]}")}}" method='post'>
-        @csrf
             <tr>
                 <td scope="row">{{$group['nom']}} </td>
-                <td><button type="submit" id="delete_button" name="deleteGroup" class="btn btn-danger">Supprimer</button></td>
+                <form action="{{url("/delete_group/{$group["nom"]}")}}" method='post'>
+                @csrf
+                    <td>
+                        <button type="submit" id="delete_button" name="deleteGroup" class="btn btn-danger">Supprimer</button>
+                    </td>
+                </form>
             </tr>
-        </form>
         @endforeach
     </tbody>
 </table>

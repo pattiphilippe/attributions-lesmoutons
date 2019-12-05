@@ -138,5 +138,4 @@ class CoursesListTest extends DuskTestCase
                 ->assertDontSee($course->id);
         });
     }
-
 }
