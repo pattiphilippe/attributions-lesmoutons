@@ -28,12 +28,11 @@
         @foreach ($groupes as $group)
             <tr>
                 <td scope="row">{{$group['nom']}} </td>
-                <form action="{{url("/delete_group/{$group["nom"]}")}}" method='post'>
-                @csrf
-                    <td>
-                        <button type="submit" id="delete_button" name="deleteGroup" class="btn btn-danger">Supprimer</button>
-                    </td>
-                </form>
+                <td>
+                    <a id="delete_button" name="deleteGroup" class="btn btn-danger" href="{{ route('delete_group', ['name' => $group["nom"]]) }}">
+                        Supprimer
+                    </a>
+                </td>
             </tr>
         @endforeach
     </tbody>

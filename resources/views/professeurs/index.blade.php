@@ -33,10 +33,11 @@
                 <td scope="row">{{$professeur["acronyme"]}} </td>
                 <td>{{$professeur["nom"]}} </td>
                 <td>{{$professeur["prenom"]}} </td>
-                <form action="{{url("/delete_professor/{$professeur["acronyme"]}")}}" method="post">
-                @csrf
-                    <td><button type="submit" id="delete_button" name="deleteProf" class="btn btn-danger">Supprimer</button></td>
-                </form>
+                <td>
+                    <a id="delete_button" name="deleteProf" class="btn btn-danger" href="{{ route('delete_professor', ['acronym' => $professeur["acronyme"]]) }}">
+                        Supprimer
+                    </a>
+                </td>
             </tr>
         @endforeach
     </tbody>
