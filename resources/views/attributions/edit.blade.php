@@ -57,7 +57,7 @@
         </select>
     </div>
 
-    <button id="submit-add-attribution" type="submit" class="btn btn-info">Valider</button>
+    <button id="submit-update-attribution" type="submit" class="btn btn-info">Valider</button>
 </form>
 
 

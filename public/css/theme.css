@@ -75,7 +75,7 @@ div {
     margin-bottom: 15px;
 }
 
-button {
+button:not([name="submit-delete"]) {
     display: inline-block;
     padding: 10px 15px;
     font-size: 16px;
@@ -187,6 +187,6 @@ a.action {
     margin: 15px 15px 0;
 }
 
-.form-btnAction {
+#form-btnAction {
     display: inline;
 }

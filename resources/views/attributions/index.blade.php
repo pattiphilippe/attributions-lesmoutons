@@ -46,12 +46,16 @@
                 <td>{{$attribution["group_id"]}} </td>
                 <td>{{$attribution["quadrimester"]}} </td>
                 <td>
-                    <form class="form-btnAction" action="{{ route('attributions.destroy',$attribution["id"]) }}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('attributions.edit',$attribution["id"]) }}">
+                    <form id="form-btnAction" action="{{ route('attributions.destroy',$attribution["id"]) }}"
+                        method="POST">
+                        <a class="btn btn-primary" id="edit-{{$attribution['id']}}"
+                            href="{{ route('attributions.edit',$attribution["id"]) }}">
                             <i class="fas fa-edit"></i> Editer</a>
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                        <button type="submit" id="delete-{{$attribution['id']}}" name="submit-delete" class="btn btn-danger"
+                            onclick="return confirm('Etes-vous sûr de supprimer cet élement ? 😢');"><i
+                                class="fas fa-trash-alt"></i> Supprimer</button>
                     </form>
                 </td>
             </tr>
@@ -77,4 +81,3 @@
 
 <script src="{{ asset('js/attributions_grouping.js') }}"></script>
 @endsection
-

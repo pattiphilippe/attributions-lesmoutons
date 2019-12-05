@@ -10,6 +10,7 @@ function csvImportListener() {
     });
 }
 
+
 function initSelectListener() {
     $("#select-groupby").on('change', function () {
         if (this.value == "group") {
@@ -82,11 +83,11 @@ function fillTable(title, attributions) {
                 <td scope="row">${attribution.course_id}</td>
                 <td>${attribution.group_id}</td>
                 <td>
-                <form class="form-btnAction" action="/attributions/${attribution.id}" method="POST">
-                    <a class="btn btn-primary" href="/attributions/${attribution.id}/edit"><i class="fas fa-edit"></i> Editer</a>
+                <form id="form-btnAction" action="/attributions/${attribution.id}" method="POST">
+                    <a class="btn btn-primary" id="edit-${attribution.id}" href="/attributions/${attribution.id}/edit"><i class="fas fa-edit"></i> Editer</a>
                     <input name="_token" value="` + csrfVar + `" type="hidden">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                    <button type="submit" id="delete-${attribution.id}" class="btn btn-danger" name="submit-delete" onclick="return confirm('Etes-vous sûr de supprimer cet élement ? 😢');"><i class="fas fa-trash-alt"></i> Supprimer</button>
                     </form>
             </td>
             </tr>
@@ -97,7 +98,3 @@ function fillTable(title, attributions) {
 function removeTable() {
     $("#attributions_list").empty();
 }
-
-$(".form-btnAction").on("submit", function () {
-    return confirm("Etes-vous sûr de vouloir supprimer cet élement 😢 ?");
-});
