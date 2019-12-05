@@ -20,9 +20,9 @@ class ProfesseurController extends Controller
         ]);
     }
 
-    public function removeProf($prof_acro) {
-        Professeur::find($prof_acro)->delete();
-        return redirect('/professeurs');
+    public function removeProf($acronyme)
+    {
+        Professeur::find($acronyme)->delete();
     }
 
     /**

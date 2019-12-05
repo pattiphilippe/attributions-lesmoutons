@@ -33,9 +33,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/uploadFileCourse', 'CourseController@uploadFileCourse')->name('upload_course');
 
     Route::post('/delete/{id}', 'CourseController@removeCourse')->name('delete');
-    Route::get('/delete_professor/{acronym}', 'ProfesseurController@removeProf')->name('delete_professor');
+    // Route::get('/delete_professor/{acronym}', 'ProfesseurController@removeProf')->name('delete_professor');
+    Route::delete('/delete_professor/{acronym}', 'ProfesseurController@removeProf');
     Route::get('/delete_group/{name}', 'GroupController@removeGroup')->name('delete_group');
 
-    Route::get('/downloadFileAttribution','AttributionsController@downloadFileAttribution')->name('download_attribution');
+    Route::get('/downloadFileAttribution', 'AttributionsController@downloadFileAttribution')->name('download_attribution');
 
 });

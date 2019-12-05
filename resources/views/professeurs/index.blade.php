@@ -28,18 +28,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($professeurs as $professeur)   
-            <tr>
-                <td scope="row">{{$professeur["acronyme"]}} </td>
-                <td>{{$professeur["nom"]}} </td>
-                <td>{{$professeur["prenom"]}} </td>
-                <td>
-                    <a id="delete_button" name="deleteProf" class="btn btn-danger delete"
-                    href="{{ route('delete_professor', ['acronym' => $professeur["acronyme"]]) }}">
-                        Supprimer
-                    </a>
-                </td>
-            </tr>
+        @foreach ($professeurs as $professeur)
+        <tr id="row-{{$professeur["acronyme"]}}">
+            <td scope="row">{{$professeur["acronyme"]}} </td>
+            <td>{{$professeur["nom"]}} </td>
+            <td>{{$professeur["prenom"]}} </td>
+            <td>
+                {{-- <a id="delete-button-{{$professeur["acronyme"]}}" name="deleteProf"
+                class="btn btn-danger delete delete-button"
+                href="{{ route('delete_professor', ['acronym' => $professeur["acronyme"]]) }}">
+                Supprimer
+                </a> --}}
+                <a class="btn btn-danger delete delete-button" role="button"
+                    data-acronyme="{{$professeur["acronyme"]}}">Supprimer</a>
+            </td>
+        </tr>
         @endforeach
     </tbody>
 </table>
@@ -69,5 +72,35 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    $(() => {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        initDeleteButtons();
+    });
+
+    function initDeleteButtons() {
+        $(".delete-button").each(function(elt) {
+            console.log($(this).attr('id'));
+            $(this).on('click', () => {
+                let row = $(this);
+
+                $.ajax({
+                    url: "/delete_professor/" + $(this).data('acronyme'),
+                    type: 'DELETE',
+                    success: function(result) {
+                        row.parent().parent().remove();
+                    },
+                    error: function (request, status, error) {
+                        console.log(request.responseText);
+                    }
+                });
+            });
+        });
+    }
 </script>
 @endsection
