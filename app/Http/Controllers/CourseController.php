@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Groupe;
 use App\Course;
-use Illuminate\Http\Request;
+use App\Groupe;
 use App\Utilitaries\Util;
-
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -23,9 +22,9 @@ class CourseController extends Controller
                     return view('courses.index', [
                         'courses' => Course::select('attributions.*', 'courses.*')
                             ->join('attributions', 'courses.id', '=', 'attributions.course_id')
-                            ->groupBy('courses.id',)
+                            ->groupBy('courses.id')
                             ->havingRaw('COUNT(*) = ?', [Groupe::count()])
-                            ->get()
+                            ->get(),
                     ]);
                 case 'coursesNonAttributed':
                     return view('courses.index', [
@@ -33,17 +32,17 @@ class CourseController extends Controller
                             ->leftJoin('attributions', 'courses.id', '=', 'attributions.course_id')
                             ->groupBy('courses.id')
                             ->havingRaw('COUNT(*) != ?', [Groupe::count()])
-                            ->get()
+                            ->get(),
                     ]);
 
                 default:
                     return view('courses.index', [
-                        'courses' => Course::all()
+                        'courses' => Course::all(),
                     ]);
             }
         }
         return view('courses.index', [
-            'courses' => Course::all()
+            'courses' => Course::all(),
         ]);
     }
 

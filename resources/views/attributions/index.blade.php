@@ -13,19 +13,19 @@
 @if(Session::has('error'))
 <div class="alert alert-danger csv-messages">{{ session('error') }}</div>
 @endif
-    <div class="form-group">
-        <label for="select-groupby">Grouper par</label>
-        <select name="groupby" id="select-groupby" name="select-groupby">
-            <option value="">Non groupées</option>
-            <option value="group">Groupe</option>
-            <option value="course">Activité d'apprentissage</option>
-        </select>
-      </div>
 <h1>Liste des attributions</h1>
 @if(count($attributions) == 0)
 <h2>La liste est vide</h2>
 <p>Pas d'attributions 😀</p>
 @else
+<div class="form-group">
+  <label for="select-groupby">Grouper par</label>
+  <select name="groupby" id="select-groupby">
+      <option value="" selected disabled>Choose here</option>
+      <option value="group">Groupe</option>
+      <option value="course">Activité d'apprentissage</option>
+  </select>
+</div>
 <div id="attributions_list">
     <table id="table-professors-list" class="table">
         <thead>
@@ -64,99 +64,6 @@
     {{-- <button type="button" onclick="window.location='{{ route('attributions.index') }}' "> > créer</button> --}}
 </div>
 
-
-<script>
-
-   $("#import-csv").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-
-    $(() => {
-        initSelectListener();
-        // fetchAttributions();
-    });
-
-    function initSelectListener() {
-        $("#select-groupby").on('change', function() {
-            if(this.value == "group") {
-                document.getElementById("export-pdf-button").href = "{{ route('download_attribution',['group_id']) }}";
-                fetchAttributions();
-            }else if(this.value == "course"){
-                document.getElementById("export-pdf-button").href = "{{ route('download_attribution',['course_id']) }}";
-            }else{
-                document.getElementById("export-pdf-button").href = "{{ route('download_attribution',['none']) }}";
-
-            }
-        });
-    }
-
-    function addTitle(title) {
-        $('#attributions_list').append(`<h3>${title}</h3>`);
-    }
-
-    function fillTable(data) {
-        removeTable();
-        for (const [key, value] of data.entries()) {
-            addGroupTable(value);
-        }
-    }
-
-    function addGroupTable(attributions) {
-        let currentGroupId = attributions[0].group_id;
-        addTitle(currentGroupId);
-        $('#attributions_list').append(`
-            <table class="table" id="table-${currentGroupId}">
-                <thead>
-                    <tr>
-                        <th>Professeur</th>
-                        <th>Cours</th>
-                        <th>Groupe</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        `);
-        attributions.forEach(attribution => {
-            addRow(attribution);
-        });
-    }
-
-    function addRow(data) {
-        $(`#table-${data.group_id} tbody`).append(`
-            <tr>
-                <td>${data.professor_acronyme}</td>
-                <td scope="row">${data.course_id}</td>
-                <td>${data.group_id}</td>
-            </tr>
-        `);
-    }
-
-    function removeTable() {
-        $("#attributions_list").empty();
-    }
-
-    function fetchAttributions() {
-        $.get("/api/attributions", (data, status) => {
-            // console.log(groupBy(data, attribution => attribution.group_id));
-            fillTable(groupBy(data, attribution => attribution.group_id));
-        });
-    }
-
-    function groupBy(list, keyGetter) {
-        const map = new Map();
-        list.forEach((item) => {
-            const key = keyGetter(item);
-            const collection = map.get(key);
-            if (!collection) {
-                map.set(key, [item]);
-            } else {
-                collection.push(item);
-            }
-        });
-        return map;
-    }
-
-</script>
+<script src="{{ asset('js/attributions_grouping.js') }}"></script>
 
 @endsection
