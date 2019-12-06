@@ -55,7 +55,7 @@
 
 
 @if(count($attributions) != 0)
-<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution',['none']) }}" role="button">Export PDF</a>
+<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution',['regular']) }}" role="button">Export PDF</a>
 @endif
 
 <div class="buttonBloc">

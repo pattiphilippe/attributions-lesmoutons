@@ -3,20 +3,22 @@ $(() => {
     initSelectListener();
 });
 
-function csvImportListener(){
-    $("#import-csv").on("change", function() {
+function csvImportListener() {
+    $("#import-csv").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 }
 
 function initSelectListener() {
-    $("#select-groupby").on('change', function() {
-        if(this.value == "group") {
+    $("#select-groupby").on('change', function () {
+        if (this.value == "group") {
             setAttributionsGroupedBy("group");
+            document.getElementById("export-pdf-button").setAttribute('href', "/downloadFileAttribution/group");
         }
-        if(this.value == "course") {
+        if (this.value == "course") {
             setAttributionsGroupedBy("course");
+            document.getElementById("export-pdf-button").setAttribute('href', "/downloadFileAttribution/course");
         }
     });
 }
@@ -72,7 +74,7 @@ function createEmptyTable(title) {
     `);
 }
 
-function fillTable(title, attributions){
+function fillTable(title, attributions) {
     attributions.forEach(attribution => {
         $(`#table-${title} tbody`).append(`
             <tr>
@@ -87,4 +89,3 @@ function fillTable(title, attributions){
 function removeTable() {
     $("#attributions_list").empty();
 }
-

@@ -2,7 +2,7 @@
 @section('content')
 <h2>Liste des attributions</h2>
 <!-- if we have a filter we apply the groupBY on it -->
-@if(isset($filter) && $filter != 'none')
+@if(isset($filter) && $filter != 'regular')
 @foreach($attributions as $attributions['filter'] => $attribution)
 <h3>{{$attributions['filter']}}</h3>
 <table width="100%">
