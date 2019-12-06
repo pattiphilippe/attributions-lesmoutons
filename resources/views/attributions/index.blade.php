@@ -46,7 +46,7 @@
                 <td>{{$attribution["group_id"]}} </td>
                 <td>{{$attribution["quadrimester"]}} </td>
                 <td>
-                    <form id="form-btnAction" action="{{ route('attributions.destroy',$attribution["id"]) }}"
+                    <form id="form-btnAction" class="btn-group" action="{{ route('attributions.destroy',$attribution["id"]) }}"
                         method="POST">
                         <a class="btn btn-primary" id="edit-{{$attribution['id']}}"
                             href="{{ route('attributions.edit',$attribution["id"]) }}">
