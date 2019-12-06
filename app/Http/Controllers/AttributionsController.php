@@ -151,13 +151,13 @@ class AttributionsController extends Controller
         if ($filter != 'null') {
             switch ($filter) {
                 case "group":
-                    $filter = 'group';
-                    $attributions = Attribution::all()->groupBy('group_id');
+                    $filter = 'group_id';
+                    $attributions = Attribution::all()->groupBy($filter);
                     break;
 
                 case "course":
                     $filter = 'course_id';
-                    $attributions = Attribution::all()->groupBy('course_id');
+                    $attributions = Attribution::all()->groupBy($filter);
                     break;
 
                 default:
