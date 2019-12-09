@@ -29,23 +29,6 @@ class ListeGroupsTest extends DuskTestCase
         });
     }
 
-    /**
-     * testGroupsReturnAccueil
-     *
-     * @return void
-     */
-    public function testGroupsReturnAccueil()
-    {
-        $user = factory(\App\User::class)->create();
-        factory(Groupe::class, 100)->create();
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->loginAs($user)
-                ->visit('/groupes')
-                ->assertSee('Liste de groupes')
-                ->click('#accueilBtn')
-                ->waitForLocation('/home');
-        });
-    }
 
     /**
      * A Dusk test example.

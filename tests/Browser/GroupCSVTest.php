@@ -5,6 +5,8 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Illuminate\Support\Facades\DB;
+
 
 class GroupCSVTest extends DuskTestCase
 {
@@ -76,4 +78,23 @@ class GroupCSVTest extends DuskTestCase
         });
     }
 
+    public function test_import_csv_delete_table()
+    {
+        $filePath = 'uploads/random_group.csv';
+        file_put_contents($filePath, "nom\nE943");
+        DB::table('groupes')->insert([
+            'nom'=>"C111",
+        ]);
+        $user = factory(\App\User::class)->create();
+        $this->browse(function (Browser $browser) use ($user, $filePath) {
+            $browser->loginAs($user)
+                ->visit('/groupes')
+                ->assertSee('Liste de groupes')
+                ->check('check_delete_table')
+                ->attach('file', $filePath)
+                ->click('#import-csv-button')
+                ->waitForText('E943')
+                ->assertDontSee('C111');
+        });
+    }
 }

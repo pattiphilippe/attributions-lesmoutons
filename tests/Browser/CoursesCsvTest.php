@@ -5,6 +5,8 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Illuminate\Support\Facades\DB;
+
 
 class CoursesCsvTest extends DuskTestCase
 {
@@ -77,6 +79,30 @@ class CoursesCsvTest extends DuskTestCase
                 ->waitForText('10')
                 ->waitForText('10')
                 ->pause(500);
+        });
+    }
+    
+    public function test_import_csv_delete_table()
+    {
+        $filePath = 'uploads/random_courses.csv';
+        file_put_contents($filePath, "id,title,credits,BM1_hours,BM2_hours\nDEV2,devel,10,10,10");
+        DB::table('courses')->insert([
+            'id' => 'DEV1',
+            'title' => 'Dévloppement',
+            'credits' => '10',
+            'BM1_hours' => '30',
+            'BM2_hours' => '30',
+        ]);
+        $user = factory(\App\User::class)->create();
+        $this->browse(function (Browser $browser) use ($user, $filePath) {
+            $browser->loginAs($user)
+                ->visit('/courses')
+                ->assertSee('Liste des Cours')
+                ->attach('file', $filePath)
+                ->click('#import-csv-button')
+                ->waitForText('Import Successful')
+                ->waitForText('DEV2')
+                ->assertDontSee('DEV1');
         });
     }
 

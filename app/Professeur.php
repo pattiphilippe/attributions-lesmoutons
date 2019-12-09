@@ -34,3 +34,4 @@ class Professeur extends Model
         DB::table('professeurs')->delete();
     }
 }
+    
