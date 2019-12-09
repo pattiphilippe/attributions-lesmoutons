@@ -57,6 +57,8 @@ class AttributionGroupingTest extends DuskTestCase
                 ->select('groupby', 'course')
                 ->select('groupby', 'group')
                 ->waitForText('E11')
+                ->waitFor('#table-E12')
+                ->waitFor('#table-E11')
                 ->assertPresent('#table-E12')
                 ->assertPresent('#table-E11');
         });
@@ -82,6 +84,9 @@ class AttributionGroupingTest extends DuskTestCase
                 ->select('groupby', 'course')
                 ->select('groupby', 'group')
                 ->waitForText('E11')
+                ->waitForText('E12')
+                ->waitFor('h3:nth-of-type(1)')
+                ->waitFor('h3:nth-of-type(2)')
                 ->assertSeeIn('h3:nth-of-type(1)', 'E12')
                 ->assertSeeIn('h3:nth-of-type(2)', 'E11');
         });
@@ -117,6 +122,9 @@ class AttributionGroupingTest extends DuskTestCase
                 ->select('groupby', 'group')
                 ->select('groupby', 'course')
                 ->waitForText('E11')
+                ->waitFor('#table-WEBG5')
+                ->waitFor('#table-DEV4')
+                ->waitFor('#table-SYSG5')
                 ->assertPresent('#table-WEBG5')
                 ->assertPresent('#table-DEV4')
                 ->assertPresent('#table-SYSG5');
@@ -142,7 +150,10 @@ class AttributionGroupingTest extends DuskTestCase
                 ->visit('/attributions')
                 ->select('groupby', 'group')
                 ->select('groupby', 'course')
-                ->waitForText('E11')
+                ->waitForText('WEBG5')
+                ->waitFor('h3:nth-of-type(1)')
+                ->waitFor('h3:nth-of-type(2)')
+                ->waitFor('h3:nth-of-type(3)')
                 ->assertSeeIn('h3:nth-of-type(1)', 'WEBG5')
                 ->assertSeeIn('h3:nth-of-type(2)', 'DEV4')
                 ->assertSeeIn('h3:nth-of-type(3)', 'SYSG5');
