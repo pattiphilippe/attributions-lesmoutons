@@ -13,7 +13,6 @@
 @if(Session::has('error'))
 <div class="alert alert-danger csv-messages">{{ session('error') }}</div>
 @endif
-
 <h1>Liste des attributions</h1>
 @if(count($attributions) == 0)
 <h2>La liste est vide</h2>
@@ -70,7 +69,7 @@
 
 
 @if(count($attributions) != 0)
-<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution') }}" role="button">Export PDF</a>
+<a id="export-pdf-button" class="btn btn-info" href="{{ route('download_attribution',['regular']) }}" role="button">Export PDF</a>
 @endif
 
 <div class="buttonBloc">

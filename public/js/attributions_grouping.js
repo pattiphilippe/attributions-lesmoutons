@@ -15,9 +15,11 @@ function initSelectListener() {
     $("#select-groupby").on('change', function () {
         if (this.value == "group") {
             setAttributionsGroupedBy("group");
+            document.getElementById("export-pdf-button").setAttribute('href', "/downloadFileAttribution/group");
         }
         if (this.value == "course") {
             setAttributionsGroupedBy("course");
+            document.getElementById("export-pdf-button").setAttribute('href', "/downloadFileAttribution/course");
         }
     });
 }

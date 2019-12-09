@@ -80,9 +80,18 @@ body>footer {
 div {
     margin-bottom: 15px;
 }
+
+.page-break {
+    page-break-after: always;
+}
        </style>
   </head>
   <body>
+        <header>
+                <img id="logo" src="./images/he2b-esi.jpg" alt="HE2B-ESI" />
+        
+                <h1>PRJG5 - HE2B ESI </h1>
+            </header>
     @yield('content')
   </body>
 </html>
