@@ -40,3 +40,13 @@ Cette courte section vous explique comment installer le projet sur votre machine
     - ```php artisan dusk:install```
     - ```php artisan migrate```
     - ```php artisan serve```
+
+## Authors
+Patti Philippe
+Piekarski Maciej
+Farci Logan
+Foud Hind
+Farci Anthony
+Anas Touda Lachiri
+Van Oye Julien
+Ousmane Cherif
